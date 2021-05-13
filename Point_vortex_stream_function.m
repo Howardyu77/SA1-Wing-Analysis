@@ -1,6 +1,6 @@
 clear;
 close all;
-% generatematrices xm, ym, psi
+% Define variables, where nx and ny is the no. of point in x and y
 nx = 51;
 ny = 41;
 xmin = -2.5;
@@ -10,6 +10,7 @@ ymax = 2.0;
 xc = 0.75;
 yc = 0.5
 Gamma = 3.0
+% generatematrices xm, ym, psi
 for i=1:1:nx
     for j=1:1:ny
         xm(i,j) = xmin + (i-1)*(xmax-xmin)/(nx-1);
