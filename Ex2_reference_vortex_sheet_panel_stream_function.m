@@ -12,6 +12,7 @@ xc = 0.75;
 yc = 0.5;
 Gamma = 3.0;
 del = 1.5;
+nv=100;
 % preallocate matrices
 xm=zeros(nx,ny);
 ym=zeros(nx,ny);
@@ -32,6 +33,12 @@ end
 c = -0.15:0.05:0.15;
 
 contour(xm,ym,infa,c);
+xlabel('x');
+ylabel('y');
 
 figure(2)
 contour(xm,ym,infb,c);
+xlabel('x');
+ylabel('y');
+box on
+print -deps2c figure_name.eps
