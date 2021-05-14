@@ -8,7 +8,6 @@ xmin = -2.5;
 xmax = 2.5;
 ymin = -2.0;
 ymax = 2.0;
-Gamma = 3.0;
 del = 1.5;
 % preallocate matrices
 xm=zeros(nx,ny);
@@ -42,9 +41,11 @@ contour(xm,ym, gamma_a*infa + gamma_b*infb, c);
 %find coordinates of point vortices
 nv=100;
 yc = 0;
-xc =zeros(nv)
+xc =zeros(nv);
+Gamma = zeros(nv);
 for n=1:1:nv
-    xc(n) = n * (del/nv)
+    xc(n) = n*(del/nv)-0.5*(del/nv);
+    Gamma(n) = gamma_a + (gamma_a-gamma_b)/del * xc(n)
 end
 
 %find stramfunction by summing streamfuntions of all the point vortices
@@ -54,7 +55,7 @@ for n=1:1:nv
         for j=1:1:ny
             xm(i,j) = xmin + (i-1)*(xmax-xmin)/(nx-1);
             ym(i,j) = ymin + (j-1)*(ymax-ymin)/(ny-1);
-            psi_n(i,j) = psipv(xc(n),yc,Gamma,xm(i,j),ym(i,j));
+            psi_n(i,j) = psipv(xc(n),yc,Gamma(n),xm(i,j),ym(i,j));
         end
     end
     psi = psi + psi_n;
@@ -62,3 +63,5 @@ end
 
 figure(4)
 contour(xm,ym,psi,c);
+
+%approcimate infa and infb
