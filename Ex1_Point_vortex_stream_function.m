@@ -8,7 +8,7 @@ xmax = 2.5
 ymin = -2.0;
 ymax = 2.0;
 xc = 0.75;
-yc = 0.5
+yc = 0.5;
 Gamma = 3.0
 % generatematrices xm, ym, psi
 for i=1:1:nx
@@ -23,3 +23,5 @@ end
 c = -0.4:0.2:1.2;
 
 contour(xm,ym,psi,c);
+xlabel('x');
+ylabel('y');
