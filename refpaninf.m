@@ -1,6 +1,5 @@
 function [infa, infb] = refpaninf(del,X,Yin)
-%   Summary of this function goes here
-%   Detailed explanation goes here
+%Get infa and infb
 if abs(Yin) < 1.0e-6
     Y = 1.0e-6;
 else
