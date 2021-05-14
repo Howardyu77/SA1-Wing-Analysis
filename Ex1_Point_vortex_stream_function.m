@@ -23,3 +23,5 @@ end
 c = -0.4:0.2:1.2;
 
 contour(xm,ym,psi,c);
+xlabel('x');
+ylabel('y');
