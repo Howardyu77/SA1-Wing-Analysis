@@ -8,14 +8,11 @@ xmin = -2.5;
 xmax = 2.5;
 ymin = -2.0;
 ymax = 2.0;
-xc = 0.75;
-yc = 0.5;
 Gamma = 3.0;
 del = 1.5;
 % preallocate matrices
 xm=zeros(nx,ny);
 ym=zeros(nx,ny);
-psi=zeros(nx,ny);
 infa=zeros(nx,ny);
 infb=zeros(nx,ny);
 % generate matrices xm, ym, psi
@@ -23,7 +20,6 @@ for i=1:1:nx
     for j=1:1:ny
         xm(i,j) = xmin + (i-1)*(xmax-xmin)/(nx-1);
         ym(i,j) = ymin + (j-1)*(ymax-ymin)/(ny-1);
-        psi(i,j) = psipv(xc,yc,Gamma,xm(i,j),ym(i,j));
         [infa(i,j),infb(i,j)] = refpaninf(del,xm(i,j),ym(i,j));
     end
 end
@@ -35,3 +31,34 @@ contour(xm,ym,infa,c);
 
 figure(2)
 contour(xm,ym,infb,c);
+
+%contourplot of streamfunction with gamma_a and gamma_b
+gamma_a=2;
+gamma_b=4;
+figure(3)
+contour(xm,ym, gamma_a*infa + gamma_b*infb, c);
+
+%contour plot of discretised panel approximation
+%find coordinates of point vortices
+nv=100;
+yc = 0;
+xc =zeros(nv)
+for n=1:1:nv
+    xc(n) = n * (del/nv)
+end
+
+%find stramfunction by summing streamfuntions of all the point vortices
+psi=zeros(nx,ny);
+for n=1:1:nv
+    for i=1:1:nx
+        for j=1:1:ny
+            xm(i,j) = xmin + (i-1)*(xmax-xmin)/(nx-1);
+            ym(i,j) = ymin + (j-1)*(ymax-ymin)/(ny-1);
+            psi_n(i,j) = psipv(xc(n),yc,Gamma,xm(i,j),ym(i,j));
+        end
+    end
+    psi = psi + psi_n;
+end
+
+figure(4)
+contour(xm,ym,psi,c);
