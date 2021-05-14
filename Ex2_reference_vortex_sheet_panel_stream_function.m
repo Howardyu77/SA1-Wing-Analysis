@@ -9,14 +9,9 @@ xmax = 2.5;
 ymin = -2.0;
 ymax = 2.0;
 del = 1.5;
-gamma_a=5;
-gamma_b=10;
+gamma_a=3;
+gamma_b=3;
 
-% preallocate matrices
-xm=zeros(nx,ny);
-ym=zeros(nx,ny);
-infa=zeros(nx,ny);
-infb=zeros(nx,ny);
 % generate matrices xm, ym, infa, infb
 for i=1:1:nx
     for j=1:1:ny
@@ -30,6 +25,7 @@ end
 c = -0.15:0.05:0.15;
 
 contour(xm,ym,infa,c);
+figure(1)
 title('Plot of fa')
 figure(2)
 contour(xm,ym,infb,c);
@@ -47,8 +43,8 @@ yc = 0;
 xc =zeros(nv);
 Gamma = zeros(nv);
 for k=1:1:nv
-    xc(k) = k*(del/nv)-0.5*(del/nv);
-    Gamma(k) = gamma_a + (gamma_a-gamma_b)/del * xc(k);
+    xc(k) = (del/nv)*(k-0.5);
+    Gamma(k) = (gamma_a + (gamma_a-gamma_b)/nv * (k-0.5))*del/nv;
 end
 
 %find stramfunction by summing streamfuntions of all the point vortices
