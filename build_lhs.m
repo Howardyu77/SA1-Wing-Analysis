@@ -19,6 +19,7 @@ for j=1:1:np+1
             end
         end
     end
+    
 end
 
 %initialise lhsmat
