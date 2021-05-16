@@ -8,11 +8,23 @@ xmin = -2.5;
 xmax = 2.5;
 ymin = -2;
 ymax = 2;
-
+%Preallocating matrices
+xm=zeros(nx,ny);
+ym=zeros(nx,ny);
+psi=zeros(nx,ny);
+psi_k=zeros(nx,ny);
+infa=zeros(nx,ny);
+infb=zeros(nx,ny);
 %define the cylinerical panels
 np=100;
 theta = (0:np)*2*pi/np;
 gamma = -2*sin(theta);
+
+%Preallocating matrices
+xs=zeros(np+1);
+ys=zeros(np+1);
+gammas=zeros(np+1);
+
 for i=1:1:np+1
     xs(i) = cos(theta(i));
 	ys(i) = sin(theta(i));
@@ -47,3 +59,4 @@ hold on
 plot(xs,ys)
 hold off 
 title('Plot of Streamfunction using fa and fb');
+

@@ -11,7 +11,16 @@ ymax = 2.0;
 del = 1.5;
 gamma_a=3;
 gamma_b=3;
-
+%Preallocating matrices
+xm=zeros(nx,ny);
+ym=zeros(nx,ny);
+infa=zeros(nx,ny);
+infb=zeros(nx,ny);
+psi_k=zeros(nx,ny);
+I0_dis_k=zeros(nx,ny);
+I1_dis_k=zeros(nx,ny);
+infa_dis=zeros(nx,ny);
+infb_dis=zeros(nx,ny);
 % generate matrices xm, ym, infa, infb
 for i=1:1:nx
     for j=1:1:ny
@@ -27,15 +36,19 @@ c = -0.15:0.05:0.15;
 contour(xm,ym,infa,c);
 figure(1)
 title('Plot of fa')
+xlabel('x');
+ylabel('y');
 figure(2)
 contour(xm,ym,infb,c);
 title('Plot of fb')
-
+xlabel('x');
+ylabel('y');
 %contour plot of streamfunction with gamma_a and gamma_b
 figure(3)
 contour(xm,ym, gamma_a*infa + gamma_b*infb, c);
 title('Plot of Streamfunction using fa and fb')
-
+xlabel('x');
+ylabel('y');
 %contour plot of discretised panel approximation
 %find coordinates and strengths of point vortices
 nv=100;
@@ -63,6 +76,8 @@ end
 figure(4)
 contour(xm,ym,psi,c);
 title('Plot of Streamfunction using discretised panel')
+xlabel('x');
+ylabel('y');
 %contour plot of approximated infa and infb
 %calculate discretised I_0 and I_1
 I0_dis=zeros(nx,ny);
@@ -89,11 +104,17 @@ end
 figure(5)
 contour(xm,ym,infa_dis,c);
 title('Plot of fa using discretised panel')
+xlabel('x');
+ylabel('y');
 
 figure(6)
 contour(xm,ym,infb_dis,c);
 title('Plot of fb using discretised panel')
+xlabel('x');
+ylabel('y');
 
 figure(7)
 contour(xm,ym,(gamma_a*infa_dis+ gamma_b*infb_dis),c);
 title('Plot of streamfunction using discrete fa and fb')
+xlabel('x');
+ylabel('y');

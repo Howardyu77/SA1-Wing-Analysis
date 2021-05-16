@@ -1,6 +1,5 @@
-function [infa,infb] = panelinf(xa,ya,xb,yb,x,y)
-%   Summary of this function goes here
-%   Detailed explanation goes here
+function [infa, infb] = panelinf(xa,ya,xb,yb,x,y)
+%   Calculate influence coefficients fa, fb at (x,y) due to our general panel.
 a = [xa ya 0];
 b = [xb yb 0];
 c = [x y 0];

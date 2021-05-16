@@ -10,6 +10,10 @@ ymax = 2.0;
 xc = 0.75;
 yc = 0.5;
 Gamma = 3.0;
+%Preallocating matrices
+xm=zeros(nx,ny);
+ym=zeros(nx,ny);
+psi=zeros(nx,ny);
 % generatematrices xm, ym, psi
 for i=1:1:nx
     for j=1:1:ny
@@ -23,5 +27,6 @@ end
 c = -0.4:0.2:1.2;
 
 contour(xm,ym,psi,c);
+title('Plot of Streamfunction of a point vortex');
 xlabel('x');
 ylabel('y');
