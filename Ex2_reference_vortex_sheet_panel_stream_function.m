@@ -33,11 +33,12 @@ end
 %contour plots of infa and infb
 c = -0.15:0.05:0.15;
 
-contour(xm,ym,infa,c);
 figure(1)
+contour(xm,ym,infa,c);
 title('Plot of fa')
 xlabel('x');
 ylabel('y');
+
 figure(2)
 contour(xm,ym,infb,c);
 title('Plot of fb')
