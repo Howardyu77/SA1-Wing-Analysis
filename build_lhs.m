@@ -19,11 +19,11 @@ for j=1:1:np+1
             end
         end
     end
-    
 end
+
 
 %initialise lhsmat
 lhsmat = zeros(np+1,np+1);
-
+for jp=1:1
 end
 
