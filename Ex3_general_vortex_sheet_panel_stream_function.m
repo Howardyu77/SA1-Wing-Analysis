@@ -35,10 +35,17 @@ end
 %contour plot of streamfunction with gamma_a and gamma_b
 c = -0.15:0.05:0.15;
 figure(1)
-contour(xm,ym, gamma_a*infa + gamma_b*infb, c);
-title('Plot of Streamfunction using fa and fb');
+contour(xm,ym,infa,c);
+title('Plot of fa');
 xlabel('x');
 ylabel('y');
+
+figure(2)
+contour(xm,ym,infb,c);
+title('Plot of fb');
+xlabel('x');
+ylabel('y');
+
 %contour plot of discretised panel approximation
 %find coordinates and strengths of point vortices
 %Preallocating matrices
@@ -47,31 +54,48 @@ yc =zeros(nv);
 xc =zeros(nv);
 Gamma = zeros(nv);
 del = sqrt((xb-xa)^2+(yb-ya)^2);
+
 for k=1:1:nv
     xc(k) = xa + (k-0.5)*((xb-xa)/nv);
     yc(k) = ya + (k-0.5)*((yb-ya)/nv);
-    Gamma(k) = (gamma_a + (gamma_a-gamma_b)/nv *(k-0.5))*del/nv;
 end
 
-%find stramfunction by summing streamfuntions of all the point vortices
-%Preallocating matrices
-psi=zeros(nx,ny);
-psi_k=zeros(nx,ny);
+
+%contour plot of approximated infa and infb
+%calculate discretised I_0 and I_1
+I0_dis =zeros(nx,ny);
+I1_dis = zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
         for j=1:1:ny
-            psi_k(i,j) = psipv(xc(k),yc(k),Gamma(k),xm(i,j),ym(i,j));
+            I0_dis_k(i,j) = psipv(xc(k),yc(k),1/nv,xm(i,j),ym(i,j));
+            I1_dis_k(i,j) = (xc(k)-xm(i,j))* psipv(xc(k),yc(k),1/nv,xm(i,j),ym(i,j));
         end
     end
-psi = psi + psi_k;
+    I0_dis = I0_dis + I0_dis_k;
+    I1_dis = I1_dis + I1_dis_k;
+end
+%calculate discretised infa and infb
+for i=1:1:nx
+    for j=1:1:ny
+        infa_dis(i,j) = (1-(xm(i,j)/del))*I0_dis(i,j)-I1_dis(i,j)/del;
+        infb_dis(i,j) = (xm(i,j)/del)*I0_dis(i,j)+I1_dis(i,j)/del;
+    end
 end
 
-
-figure(2)
-contour(xm,ym,psi,c);
-title('Plot of Streamfunction using discretised point vortices')
+%plot discretised infa and infb
+figure(3)
+contour(xm,ym,infa_dis,c);
+title('Plot of fa using discretised panel')
 xlabel('x');
 ylabel('y');
+
+figure(4)
+contour(xm,ym,infb_dis,c);
+title('Plot of fb using discretised panel')
+xlabel('x');
+ylabel('y');
+
 
 
 
