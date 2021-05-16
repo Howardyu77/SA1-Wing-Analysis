@@ -22,11 +22,11 @@ theta = (0:np)*2*pi/np;
 xs=zeros(np+1);
 ys=zeros(np+1);
 gammas=zeros(np+1);
-for i=1:1:np+1
-    xs(i) = cos(theta(i));
-	ys(i) = sin(theta(i));
-    gammas(i) = -2*sin(theta(i));
-end
+
+    xs = cos(theta);
+	ys = sin(theta);
+    gammas = -2*sin(theta);
+
 
 % generate matrices xm, ym
 for i=1:1:nx
