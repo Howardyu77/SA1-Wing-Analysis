@@ -13,14 +13,15 @@ xm=zeros(nx,ny);
 ym=zeros(nx,ny);
 psi=zeros(nx,ny);
 psi_k=zeros(nx,ny);
-xs=zeros(np+1);
-ys=zeros(np+1);
-gammas=zeros(np+1);
 infa=zeros(nx,ny);
 infb=zeros(nx,ny);
 %define the cylinerical panels
 np=100;
 theta = (0:np)*2*pi/np;
+%Preallocating matrices
+xs=zeros(np+1);
+ys=zeros(np+1);
+gammas=zeros(np+1);
 for i=1:1:np+1
     xs(i) = cos(theta(i));
 	ys(i) = sin(theta(i));
