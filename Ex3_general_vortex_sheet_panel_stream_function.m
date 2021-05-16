@@ -11,10 +11,10 @@ ymax = 4;
 
 xa=4.1;
 ya=1.6;
-gamma_a=3;
+gamma_a=1;
 xb=2.2;
 yb=2.9;
-gamma_b=3;
+gamma_b=1;
 
 % generate matrices xm, ym, infa, infb
 for i=1:1:nx
@@ -52,8 +52,9 @@ for k=1:1:nv
             psi_k(i,j) = psipv(xc(k),yc(k),Gamma(k),xm(i,j),ym(i,j));
         end
     end
-    psi = psi + psi_k;
+psi = psi + psi_k;
 end
+
 
 figure(2)
 contour(xm,ym,psi,c);

@@ -65,23 +65,23 @@ contour(xm,ym,psi,c);
 title('Plot of Streamfunction using discretised panel')
 %contour plot of approximated infa and infb
 %calculate discretised I_0 and I_1
-I_0_dis=zeros(nx,ny);
-I_1_dis = zeros(nx,ny);
+I0_dis=zeros(nx,ny);
+I1_dis = zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
         for j=1:1:ny
-            I_0_dis_k(i,j) = psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
-            I_1_dis_k(i,j) = (xc(k)-xm(i,j))* psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
+            I0_dis_k(i,j) = psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
+            I1_dis_k(i,j) = (xc(k)-xm(i,j))* psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
         end
     end
-    I_0_dis = I_0_dis + I_0_dis_k;
-    I_1_dis = I_1_dis + I_1_dis_k;
+    I0_dis = I0_dis + I0_dis_k;
+    I1_dis = I1_dis + I1_dis_k;
 end
 %calculate discretised infa and infb
 for i=1:1:nx
     for j=1:1:ny
-        infa_dis(i,j) = (1-(xm(i,j)/del))*I_0_dis(i,j)-I_1_dis(i,j)/del;
-        infb_dis(i,j) = (xm(i,j)/del)*I_0_dis(i,j)+I_1_dis(i,j)/del;
+        infa_dis(i,j) = (1-(xm(i,j)/del))*I0_dis(i,j)-I1_dis(i,j)/del;
+        infb_dis(i,j) = (xm(i,j)/del)*I0_dis(i,j)+I1_dis(i,j)/del;
     end
 end
 

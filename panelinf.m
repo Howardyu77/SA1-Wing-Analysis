@@ -1,4 +1,4 @@
-function [infa infb] = panelinf(xa,ya,xb,yb,x,y)
+function [infa,infb] = panelinf(xa,ya,xb,yb,x,y)
 %   Summary of this function goes here
 %   Detailed explanation goes here
 a = [xa ya 0];
@@ -10,7 +10,7 @@ t = (b-a)/norm(b-a);
 m = cross(r,t);
 n = cross(t,m)/norm(cross(t,m));
 
-del = norm(b-a);
+del = sqrt((xb-xa)^2+(yb-ya)^2);
 X = dot(r,t);
 Y = dot(r,n);
 
