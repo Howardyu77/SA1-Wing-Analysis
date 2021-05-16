@@ -3,8 +3,6 @@ function lhsmat = build_lhs(xs,ys)
 np = length(xs) - 1; 
 psip = zeros(np,np+1);
 
-
-
 for ip=1:1:np
     for jp=1:1:np+1
         [infa(jp,jp),infb(jp,jp)] = panelinf(xs(jp),ys(jp),xs(jp+1),ys(jp+1),xm(ip,ip),ym(ip,ip));

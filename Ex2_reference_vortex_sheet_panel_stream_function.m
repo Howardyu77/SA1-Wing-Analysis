@@ -17,8 +17,8 @@ ym=zeros(nx,ny);
 infa=zeros(nx,ny);
 infb=zeros(nx,ny);
 psi_k=zeros(nx,ny);
-I_0_dis_k=zeros(nx,ny);
-I_1_dis_k=zeros(nx,ny);
+I0_dis_k=zeros(nx,ny);
+I1_dis_k=zeros(nx,ny);
 infa_dis=zeros(nx,ny);
 infb_dis=zeros(nx,ny);
 % generate matrices xm, ym, infa, infb
@@ -33,22 +33,18 @@ end
 %contour plots of infa and infb
 c = -0.15:0.05:0.15;
 
-contour(xm,ym,infa,c);
 figure(1)
+contour(xm,ym,infa,c);
 title('Plot of fa')
 xlabel('x');
 ylabel('y');
+
 figure(2)
 contour(xm,ym,infb,c);
 title('Plot of fb')
 xlabel('x');
 ylabel('y');
-%contour plot of streamfunction with gamma_a and gamma_b
-figure(3)
-contour(xm,ym, gamma_a*infa + gamma_b*infb, c);
-title('Plot of Streamfunction using fa and fb')
-xlabel('x');
-ylabel('y');
+
 %contour plot of discretised panel approximation
 %find coordinates and strengths of point vortices
 nv=100;
@@ -73,48 +69,42 @@ for k=1:1:nv
     psi = psi + psi_k;
 end
 
-figure(4)
+figure(3)
 contour(xm,ym,psi,c);
-title('Plot of Streamfunction using discretised panel')
+title('Plot of Streamfunction using discrete vortex approximation')
 xlabel('x');
 ylabel('y');
 %contour plot of approximated infa and infb
-%calculate discretised I_0 and I_1
-I_0_dis=zeros(nx,ny);
-I_1_dis = zeros(nx,ny);
+%calculate discretised I0 and I1
+I0_dis=zeros(nx,ny);
+I1_dis = zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
         for j=1:1:ny
-            I_0_dis_k(i,j) = psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
-            I_1_dis_k(i,j) = (xc(k)-xm(i,j))* psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
+            I0_dis_k(i,j) = psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
+            I1_dis_k(i,j) = (xc(k)-xm(i,j))* psipv(xc(k),yc,1/nv,xm(i,j),ym(i,j));
         end
     end
-    I_0_dis = I_0_dis + I_0_dis_k;
-    I_1_dis = I_1_dis + I_1_dis_k;
+    I0_dis = I0_dis + I0_dis_k;
+    I1_dis = I1_dis + I1_dis_k;
 end
 %calculate discretised infa and infb
 for i=1:1:nx
     for j=1:1:ny
-        infa_dis(i,j) = (1-(xm(i,j)/del))*I_0_dis(i,j)-I_1_dis(i,j)/del;
-        infb_dis(i,j) = (xm(i,j)/del)*I_0_dis(i,j)+I_1_dis(i,j)/del;
+        infa_dis(i,j) = (1-(xm(i,j)/del))*I0_dis(i,j)-I1_dis(i,j)/del;
+        infb_dis(i,j) = (xm(i,j)/del)*I0_dis(i,j)+I1_dis(i,j)/del;
     end
 end
 
 %plot discretised infa and infb
-figure(5)
+figure(4)
 contour(xm,ym,infa_dis,c);
 title('Plot of fa using discretised panel')
 xlabel('x');
 ylabel('y');
 
-figure(6)
+figure(5)
 contour(xm,ym,infb_dis,c);
 title('Plot of fb using discretised panel')
-xlabel('x');
-ylabel('y');
-
-figure(7)
-contour(xm,ym,(gamma_a*infa_dis+ gamma_b*infb_dis),c);
-title('Plot of streamfunction using discrete fa and fb')
 xlabel('x');
 ylabel('y');
