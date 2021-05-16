@@ -30,7 +30,8 @@ c = -0.15:0.05:0.15;
 figure(1)
 contour(xm,ym, gamma_a*infa + gamma_b*infb, c);
 title('Plot of Streamfunction using fa and fb');
-
+xlabel('x');
+ylabel('y');
 %contour plot of discretised panel approximation
 %find coordinates and strengths of point vortices
 nv=100;
@@ -58,7 +59,8 @@ end
 figure(2)
 contour(xm,ym,psi,c);
 title('Plot of Streamfunction using discretised point vortices')
-
+xlabel('x');
+ylabel('y');
 
 
 

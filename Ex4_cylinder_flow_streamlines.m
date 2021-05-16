@@ -45,3 +45,4 @@ hold on
 plot(xs,ys)
 hold off 
 title('Plot of Streamfunction using fa and fb');
+
