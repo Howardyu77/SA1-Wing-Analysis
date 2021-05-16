@@ -18,14 +18,9 @@ infb=zeros(nx,ny);
 %define the cylinerical panels
 np=100;
 theta = (0:np)*2*pi/np;
-%Preallocating matrices
-xs=zeros(np+1);
-ys=zeros(np+1);
-gammas=zeros(np+1);
-
-    xs = cos(theta);
-	ys = sin(theta);
-    gammas = -2*sin(theta);
+xs = cos(theta);
+ys = sin(theta);
+gammas = -2*sin(theta);
 
 
 % generate matrices xm, ym
