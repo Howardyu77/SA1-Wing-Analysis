@@ -15,6 +15,11 @@ gamma_a=3;
 xb=2.2;
 yb=2.9;
 gamma_b=3;
+%Preallocating matrices
+xm=zeros(nx,ny);
+ym=zeros(nx,ny);
+infa=zeros(nx,ny);
+infb=zeros(nx,ny);
 
 % generate matrices xm, ym, infa, infb
 for i=1:1:nx
@@ -34,6 +39,7 @@ xlabel('x');
 ylabel('y');
 %contour plot of discretised panel approximation
 %find coordinates and strengths of point vortices
+%Preallocating matrices
 nv=100;
 yc =zeros(nv);
 xc =zeros(nv);
@@ -46,7 +52,9 @@ for k=1:1:nv
 end
 
 %find stramfunction by summing streamfuntions of all the point vortices
+%Preallocating matrices
 psi=zeros(nx,ny);
+psi_k=zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
         for j=1:1:ny

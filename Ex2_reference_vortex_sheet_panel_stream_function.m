@@ -11,7 +11,16 @@ ymax = 2.0;
 del = 1.5;
 gamma_a=3;
 gamma_b=3;
-
+%Preallocating matrices
+xm=zeros(nx,ny);
+ym=zeros(nx,ny);
+infa=zeros(nx,ny);
+infb=zeros(nx,ny);
+psi_k=zeros(nx,ny);
+I_0_dis_k=zeros(nx,ny);
+I_1_dis_k=zeros(nx,ny);
+infa_dis=zeros(nx,ny);
+infb_dis=zeros(nx,ny);
 % generate matrices xm, ym, infa, infb
 for i=1:1:nx
     for j=1:1:ny
