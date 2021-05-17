@@ -65,6 +65,10 @@ end
 %calculate discretised I_0 and I_1
 I0_dis =zeros(nx,ny);
 I1_dis = zeros(nx,ny);
+I0_dis_k =zeros(nx,ny);
+I1_dis_k = zeros(nx,ny);
+infa_dis =zeros(nx,ny);
+infb_dis = zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
         for j=1:1:ny
