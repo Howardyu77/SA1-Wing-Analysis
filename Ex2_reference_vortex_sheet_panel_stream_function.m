@@ -18,8 +18,7 @@ infb=zeros(nx,ny);
 psi_k=zeros(nx,ny);
 I0_dis_k=zeros(nx,ny);
 I1_dis_k=zeros(nx,ny);
-infa_dis=zeros(nx,ny);
-infb_dis=zeros(nx,ny);
+
 
 % generate matrices xm, ym, infa, infb
 for i=1:1:nx

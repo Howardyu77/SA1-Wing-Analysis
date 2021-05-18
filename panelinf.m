@@ -6,7 +6,7 @@ c = [x y 0];
 
 r = c-a;
 t = (b-a)/norm(b-a);
-m = [0 0 1];
+m = [0 0 -1];
 n = cross(t,m)/norm(cross(t,m));
 
 del = sqrt((xb-xa)^2+(yb-ya)^2);
