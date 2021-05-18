@@ -1,14 +1,14 @@
 clear;
 close all;
 %define the cylinerical panels
-np=100;
-theta = (0:np)*2*pi/np;
+nq=100;
+theta = (0:nq)*2*pi/nq;
 xs = cos(theta);
 ys = sin(theta);
 gammas = -2*sin(theta);
 
 %flow condition
-alpha=pi/15;
+alpha=0;
 
 A = build_lhs(xs,ys);
 b = build_rhs(xs,ys,alpha); 
