@@ -1,6 +1,8 @@
+clear;
+close all;
 %define the cylinerical panels
-np=100;
-theta = (0:np)*2*pi/np;
+nq=100;
+theta = (0:nq)*2*pi/nq;
 xs = cos(theta);
 ys = sin(theta);
 gammas = -2*sin(theta);
