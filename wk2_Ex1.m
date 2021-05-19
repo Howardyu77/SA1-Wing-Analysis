@@ -8,11 +8,11 @@ n=length(x);
 %for zero-pressure-gradient b'layer
 ue=ones(1,n);
 
-TS=zeros(n,1);
+TS=zeros(1,n);
 
 for i=1:1:n
     thetasq=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1,1),ue(1,1),x(1,i),ue(1,i));
-    TS(i,1)=sqrt(thetasq);
+    TS(1,i)=sqrt(thetasq);
 end
 
 plot(x,TS);
