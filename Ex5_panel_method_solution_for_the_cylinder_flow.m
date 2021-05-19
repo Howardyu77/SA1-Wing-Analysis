@@ -15,7 +15,7 @@ b = build_rhs(xs,ys,alpha);
 gam = A\b;
 
 %total circulation 
-%arc length of a unit circle
+%arc length of the panels on a unit circle
 arc_length = 2*pi*(2*pi/nq);
 Gamma=0;
 for i=1:1:length(gam)
@@ -41,7 +41,7 @@ for i=1:1:length(gam)
     Gamma = gam(i)*arc_length + Gamma;
 end 
 
-Gamma 
+Gamma;
 
 hold on
 plot(theta/pi,gam)
