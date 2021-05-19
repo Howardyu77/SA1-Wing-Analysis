@@ -2,14 +2,14 @@ clear;
 close all;
 
 %define Reynolds number, create vectors
-ReL=50e6;
+ReL=2e6;
 x = linspace(0,1,101);
 n=length(x);
 %linearly varying ue/U
 ue=linspace(1,0.9,101);
-%find the pressure gradient 
-p_grad = gradient(ue,x);
-p_grad(1);
+%find the velocity gradient 
+v_grad = gradient(ue,x);
+v_grad(1);
 TS=zeros(1,n);
 
 for i=1:1:n
