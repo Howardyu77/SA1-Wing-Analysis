@@ -59,6 +59,7 @@ for k=1:1:nv
     Gamma(k) = (gamma_a + (gamma_b-gamma_a)/nv * (k-0.5))*del/nv;
 end
 
+psi=zeros(nx,ny);
 psi_k=zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
@@ -89,6 +90,7 @@ for k=1:1:nv
 end
 
 psi=zeros(nx,ny);
+psi_k=zeros(nx,ny);
 for k=1:1:nv
     for i=1:1:nx
         for j=1:1:ny

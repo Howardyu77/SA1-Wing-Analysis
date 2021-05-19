@@ -1,8 +1,8 @@
 clear;
 close all;
 %define the cylinerical panels
-nq=100;
-theta = (0:nq)*2*pi/nq;
+np=100;
+theta = (0:np)*2*pi/np;
 xs = cos(theta);
 ys = sin(theta);
 gammas = -2*sin(theta);
@@ -16,7 +16,7 @@ gam = A\b;
 
 %total circulation 
 %arc length of the panels on a unit circle
-arc_length = 2*pi*(2*pi/nq);
+arc_length = 2*pi*(2*pi/np);
 Gamma=0;
 for i=1:1:length(gam)
     Gamma = gam(i)*arc_length + Gamma;
@@ -35,7 +35,7 @@ gam = A\b;
 
 %total circulation 
 %arc length of a unit circle
-arc_length = 2*pi/nq;
+arc_length = 2*pi/np;
 Gamma=0;
 for i=1:1:length(gam)
     Gamma = gam(i)*arc_length + Gamma;
