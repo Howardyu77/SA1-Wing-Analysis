@@ -2,11 +2,11 @@ clear;
 close all;
 
 %define Reynolds number, create vectors
-ReL=2500;
+ReL=50e6;
 x = linspace(0,1,101);
 n=length(x);
-%for zero-pressure-gradient b'layer
-ue=ones(1,n);
+%linearly varying ue/U
+ue=linspace(1,0,101);
 
 TS=zeros(n,1);
 
