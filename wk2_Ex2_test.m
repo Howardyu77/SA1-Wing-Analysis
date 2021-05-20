@@ -3,11 +3,11 @@ close all;
 
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-ReL=2e6;
+ReL=10e6;%change acrodingly
 x = linspace(0,1,n);
 n=length(x);
 %linearly varying ue/U
-ue=linspace(1,0.9,n);
+ue=linspace(1,.9,n);%change acrodingly
 %find the velocity gradient 
 v_grad = gradient(ue,x);
 v_grad(1);
@@ -19,7 +19,7 @@ while laminar && i < n
     TS(1,i)=sqrt(thetaonlsq);%Thwaites’ solution
     Rethet=ReL*ue(1,i)*TS(1,i);
     
-    m=-ReL*(TS(1,i)^2)*p_grad(1,i);
+    m=-ReL*(TS(1,i)^2)*v_grad(1,i);
     H = thwaites_lookup(m);
     He=laminar_He(H);
     

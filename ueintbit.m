@@ -1,6 +1,5 @@
 function f = ueintbit(xa,ua,xb,ub)
-%UNTITLED20 Summary of this function goes here
-%   Detailed explanation goes here
+%Calculate the integral contribution on the momentum integral equation
 u_bar=(ua+ub)/2;
 del_u=ub-ua;
 del_x=xb-xa;

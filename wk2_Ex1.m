@@ -21,3 +21,4 @@ plot(x,(0.664/sqrt(ReL)).*sqrt(x));
 xlabel('x/L')
 ylabel('\theta/L')
 legend('Thwaites’ solution','Blasius solution')
+title('Momentum thickness plot')
