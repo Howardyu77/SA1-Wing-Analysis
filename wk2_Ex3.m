@@ -5,7 +5,6 @@ n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
 ReL=1e4;
 x = linspace(0,1,n);
-n=length(x);
 %linearly varying ue/U
 ue=linspace(1,0.5,n);
 %define variables to store location of transition or separation

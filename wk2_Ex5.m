@@ -2,10 +2,12 @@ clear;
 close all;
 %define global variables
 global Re ue0 duedx
+n = 101; % defines number of panels
 
-Re=1e7;
+
+Re=1e8;
 ue0=1;
-duedx=0;
+duedx=-0.6;
 
 
 %define intital values of theta and delta_E
@@ -20,11 +22,21 @@ x=delx+x0;
 theta_7=0.037.*x.*(Re.*x).^(-1/5);
 theta_9=0.023.*x.*(Re.*x).^(-1/6);
 
-plot(x,theta_7);
-hold on 
-plot(x, theta_9);
+He=thickhist(:,1)./thickhist(:,2);
+
+
+
 plot(x, thickhist(:,1));
-legend({'\theta_7/L','\theta_9/L','thickhist'},'Location','northwest','FontSize',14);
+hold on 
+plot(x, thickhist(:,2));
+legend({'\theta/L','\delta_E/L'},'Location','northwest','FontSize',14);
 ylabel('\theta/L');
 xlabel('x/L')
+
+
+figure(2)
+plot(x, He);
+hold on 
+threshold=1.46.*ones(length(x));
+plot(x,threshold);
 

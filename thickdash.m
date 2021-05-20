@@ -16,12 +16,12 @@ if He>=1.46
 else
     H=2.803;
 end
-c_f=0.091416*((H-1)*Retheta)^-0.232*exp(-1.26*H);
-c_diss=0.010011*((H-1)*Retheta)^(-1/6);
+c_f=0.091416.*((H-1)*Retheta).^(-0.232).*exp(-1.26.*H);
+c_diss=0.010011.*((H-1)*Retheta).^(-1/6);
 
 
 dthickdx=zeros(2,1);
-dthickdx(1,1)=(c_f/2)-((H+2)/ue) * duedx * theta;
-dthickdx(2,1)=c_diss-3/ue * duedx * delta_E;
+dthickdx(1,1)=(c_f/2)-((H+2)./ue) .* duedx .* theta;
+dthickdx(2,1)=c_diss-3./ue .* duedx .* delta_E;
 end
 
