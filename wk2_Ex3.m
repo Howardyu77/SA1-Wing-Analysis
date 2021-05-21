@@ -16,6 +16,7 @@ v_grad(1);
 TS=zeros(1,n);
 i = 1;
 while laminar && i < n
+    i = i + 1;
     %compute theta/L, Thwaites’ solution, Retheta
     thetaonlsq=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1,1),ue(1,1),x(1,i),ue(1,i));
     TS(1,i)=sqrt(thetaonlsq); %Thwaites’ solution
@@ -45,7 +46,6 @@ while laminar && i < n
         disp(['Laminar separation at ' num2str(x(ils)) ...
                               ' with Rethet ' num2str(Rethet)])
     end
-    i = i + 1;
 end
 
 

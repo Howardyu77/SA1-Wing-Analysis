@@ -6,9 +6,9 @@ global Re ue0 duedx
 %Conditions for panels and flow
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-ReL=1e4;
+ReL=1e6;
 x = linspace(0,1,n);
-duedx=-0.6; %velocity grad
+duedx=-0.25; %velocity grad
 
 %linearly varying ue/U
 ue=linspace(1,1+duedx,n);
@@ -28,17 +28,17 @@ v_grad = duedx;
 TS=zeros(1,n);
 He=zeros(1,n);
 He(1,1)=1.57258; % define He at x/l=0
-delta_E=zeros(1,n);
-
+theta=zeros(1,n);
 
 %start the laminar loop
 i = 1;
 while laminar && i < n
+    i = i + 1;
     %compute theta/L, Thwaites’ solution, Retheta
     thetaonlsq=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1,1),ue(1,1),x(1,i),ue(1,i));
     TS(1,i)=sqrt(thetaonlsq); %Thwaites’ solution
     Rethet=ReL*ue(1,i)*TS(1,i);
-    
+    theta(1,i)=sqrt(thetaonlsq);
     m=-ReL*(TS(1,i)^2)*v_grad;
     H = thwaites_lookup(m);
     He(1,i)=laminar_He(H);
@@ -51,41 +51,86 @@ while laminar && i < n
         laminar = false;
         ils=i;
     end
-    %second condition happens first means that separation happens before
-    %trainsition and int will be zero, if int is non-zero then trainsition
-    %happens first
-    if int ~= 0
-        disp(['Natural transition at ' num2str(x(int)) ...
-                              ' with Rethet ' num2str(Rethet)])
-    end
-    
-    if ils ~= 0
-        disp(['Laminar separation at ' num2str(x(ils)) ...
-                              ' with Rethet ' num2str(Rethet)]);
-        He(1,i)=1.51509;%set to ls value
-    end
-    i = i + 1;
 end
 
-%initial conditions for turbulent loop
-delta_E=sqrt(thetaonlsq)*He(1,i);
+
+ill=x(i);
+disp(ill)
+
+if ils ~= 0
+    He(1,i)=1.51509;%set to ls value
+end
+
+
+%initial conditions for turbulent loop from laminar loop output
+delta_E=sqrt(thetaonlsq)*He(1,i); %to counteract the i+1 in the lam flow loop
 Re=ReL;
+thick0(1) = theta(1,i); %theta
+thick0(2) = delta_E; %delta_E
 
-
-%start turbulent loop
+%start turbulent loop, geting data from laminar loop output
 while its==0 && i<n
+    i = i + 1;
     ue0=ue(1,i);
-    thick0(1) = 0.023*x(1,i)*(Re*x(1,i))^(-1/6); %theta
-    thick0(2) = delta_E; %delta_E
     [delx, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
-    thick0(1)=thickhist(i,1);
-    thick0(2)=thickhist(i,2);
+    %update theta and delta_E
+    thick0(1)=thickhist(end,1);
+    thick0(2)=thickhist(end,2);
+    theta(1,i)=thickhist(end,1);
+    He(1,i)=thick0(2)/thick0(1);% this
+    
+    
+    %test for turbulent reattachment if it hasn't reattached
+    if ils ~= 0  && itr==0
+        if He(1,i)>1.58
+            itr=i;   
+        end
+    end
+    
+    %test for turbulent separation
+    if He(1,i)<1.46
+        its=i;
+    end 
+    
 end 
 
-plot(x,TS);
+%separated turbulent boundary layer
+while its~=0 && i<n
+    i=i+1;
+    theta(1,i)=(ue(1,i-1)/ue(1,i))^(2.803+2)*theta(1,i-1);
+    He(1,i)=He(1,its);
+end
+
+%output
+%second condition happens first means that separation happens before
+    %trainsition and int will be zero, if int is non-zero then trainsition
+    %happens first
+if int ~= 0
+    disp(['Natural transition at ' num2str(x(int)) ...
+        ' with Rethet ' num2str(Rethet)])
+end
+
+if ils ~= 0
+    disp(['Laminar separation at ' num2str(x(ils)) ...
+        ' with Rethet ' num2str(Rethet)]);
+end
+
+if itr~=0
+    disp(['Turbulent reattachment at ' num2str(x(itr))]);
+end
+
+if its~=0
+    disp(['Turbulent separation at ' num2str(x(its))]);
+end
+
+plot(x,theta);
 hold on
-BS=0.664/sqrt(ReL);
-plot(x,BS.*sqrt(x));
 xlabel('x/L')
 ylabel('\theta/L')
-legend('Thwaites’ solution','Blasius solution')
+title('Non-dimensionalised momentum thickness plot')
+
+figure(2)
+plot(x,He)
+xlabel('x/L')
+ylabel('H_e/L')
+title('Energy shape factor plot')
