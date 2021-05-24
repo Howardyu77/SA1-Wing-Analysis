@@ -36,4 +36,13 @@ end
 %setting the entries of the left hand side matrix that correpond to zero
 %gammas
 lhsmat(1,1)=1;
-lhsmat(np+1,np+1)=1;
+lhsmat(1,2)=-1;
+lhsmat(1,np)=1;
+lhsmat(1,3)=0.5;
+lhsmat(1,np-1)=-0.5;
+
+lhsmat(np+1,np+1)=-1;
+lhsmat(np+1,2)=-1;
+lhsmat(np+1,np)=1;
+lhsmat(np+1,3)=0.5;
+lhsmat(np+1,np-1)=-0.5;
