@@ -25,7 +25,6 @@ v_grad = duedx;
 
 
 %initialise empty matrices to store results
-TS=zeros(1,n);
 He=zeros(1,n);
 He(1,1)=1.57258; % define He at x/l=0
 theta=zeros(1,n);
@@ -34,9 +33,9 @@ theta=zeros(1,n);
 i = 1;
 while laminar && i < n
     i = i + 1;
-    %compute theta/L, Thwaites’ solution, Retheta
+    %compute theta/L, Retheta
     theta(i)=(0.45/ReL)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
-    theta(i)=sqrt(theta(i)); %Thwaites’ solution
+    theta(i)=sqrt(theta(i));
     Rethet=ReL*ue(i)*theta(i);
 
     m=-ReL*(theta(i)^2)*v_grad;
@@ -121,14 +120,14 @@ if its~=0
     disp(['Turbulent separation at ' num2str(x(its))]);
 end
 
-plot(x,theta);
+plot(x,theta,'LineWidth',2);
 hold on
 xlabel('x/L')
 ylabel('\theta/L')
 title('Non-dimensionalised momentum thickness plot')
 
 figure(2)
-plot(x,He)
+plot(x,He,'LineWidth',2)
 xlabel('x/L')
 ylabel('H_e/L')
 title('Energy shape factor plot')

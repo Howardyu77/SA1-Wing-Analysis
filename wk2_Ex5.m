@@ -5,7 +5,7 @@ global Re ue0 duedx
 n = 101; % defines number of panels
 
 
-Re=1e7;
+Re=1e8;
 ue0=1;
 duedx=-0.6;
 
@@ -25,20 +25,25 @@ theta_9=0.023.*x.*(Re.*x).^(-1/6);
 He=thickhist(:,2)./thickhist(:,1);
 
 
-
-plot(x, thickhist(:,1));
+plot(x, thickhist(:,1),'LineWidth',1.5);
 hold on 
-plot(x, thickhist(:,2));
+plot(x, thickhist(:,2),'LineWidth',1.5);
 legend({'\theta/L','\delta_E/L'},'Location','northwest','FontSize',14);
 ylabel('\theta/L & \delta_E/L');
 xlabel('x/L')
 title('Non-dimensionalised thickness plot')
 
 figure(2)
-plot(x, He);
+plot(x, He,'LineWidth',1.5);
 hold on 
-threshold=1.46.*ones(length(x));
-plot(x,threshold);
+threshold=1.46.*ones(length(x),1);
+plot(x,threshold,':','LineWidth',1.5);
+
+%using InterX function(downloaded from MathWork) to find the intesection between the threshold line
+%and the He curve
+P = InterX([x';He'],[x';threshold']);
+plot(P(1,:),P(2,:),'r.','markersize',18)
+disp([P(1,:),P(2,:)]);
 xlabel('x/L')
 ylabel('H_e/L')
 legend('Energy shape factor','Threshold for turbulent separation')

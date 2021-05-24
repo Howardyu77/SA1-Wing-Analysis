@@ -20,10 +20,10 @@ x=delx+x0;
 theta_7=0.037.*x.*(Re.*x).^(-1/5);
 theta_9=0.023.*x.*(Re.*x).^(-1/6);
 
-plot(x,theta_7);
+plot(x,theta_7,'LineWidth',1.5);
 hold on 
-plot(x, theta_9);
-plot(x, thickhist(:,1));
+plot(x, theta_9,'LineWidth',1.5);
+plot(x, thickhist(:,1),'LineWidth',1.5,'color',[0, 0.5, 0] );
 legend({'\theta_7/L','\theta_9/L','thickhist'},'Location','northwest','FontSize',14);
 ylabel('\theta/L');
 xlabel('x/L')

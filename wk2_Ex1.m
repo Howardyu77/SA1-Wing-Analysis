@@ -15,10 +15,10 @@ for i=1:1:n
     TS(1,i)=sqrt(thetasq);
 end
 
-plot(x,TS);
+plot(x,TS,'LineWidth',1.5);
 hold on
-plot(x,(0.664/sqrt(ReL)).*sqrt(x));
+plot(x,(0.664/sqrt(ReL)).*sqrt(x),'LineWidth',1.5);
 xlabel('x/L')
 ylabel('\theta/L')
-legend('Thwaites’ solution','Blasius solution')
+legend({'Thwaites’ solution','Blasius solution'},'Location','northwest','FontSize',14);
 title('Momentum thickness plot')
