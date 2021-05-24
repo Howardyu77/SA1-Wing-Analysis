@@ -30,7 +30,7 @@ plot(x, thickhist(:,1));
 hold on 
 plot(x, thickhist(:,2));
 legend({'\theta/L','\delta_E/L'},'Location','northwest','FontSize',14);
-ylabel('\theta/L');
+ylabel('\theta/L & \delta_E/L');
 xlabel('x/L')
 title('Non-dimensionalised thickness plot')
 

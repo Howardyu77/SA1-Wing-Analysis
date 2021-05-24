@@ -1,6 +1,5 @@
 function dthickdx = thickdash(xmx0,thick)
-%UNTITLED26 Summary of this function goes here
-%   Detailed explanation goes here
+%compute thickdash function
 global Re ue0 duedx %ReL, free-stream velocity, velocity gradient (non-dimensional)
 
 theta=thick(1,1);
@@ -8,7 +7,7 @@ delta_E=thick(2,1);
 
 
 ue=ue0+duedx*xmx0;
-Retheta=Re*ue*theta;%meant to be theta/L 
+Retheta=Re*ue*theta;
 
 He=delta_E/theta;
 if He>=1.46

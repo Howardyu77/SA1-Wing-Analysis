@@ -6,7 +6,7 @@ global Re ue0 duedx
 %Conditions for panels and flow
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-ReL=1e6;
+ReL=1e4;
 x = linspace(0,1,n);
 duedx=-0.25; %velocity grad
 
@@ -35,15 +35,15 @@ i = 1;
 while laminar && i < n
     i = i + 1;
     %compute theta/L, Thwaites’ solution, Retheta
-    thetaonlsq=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1,1),ue(1,1),x(1,i),ue(1,i));
-    TS(1,i)=sqrt(thetaonlsq); %Thwaites’ solution
-    Rethet=ReL*ue(1,i)*TS(1,i);
-    theta(1,i)=sqrt(thetaonlsq);
-    m=-ReL*(TS(1,i)^2)*v_grad;
+    theta(i)=(0.45/ReL)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+    theta(i)=sqrt(theta(i)); %Thwaites’ solution
+    Rethet=ReL*ue(i)*theta(i);
+
+    m=-ReL*(theta(i)^2)*v_grad;
     H = thwaites_lookup(m);
-    He(1,i)=laminar_He(H);
+    He(i)=laminar_He(H);
     
-    if log(Rethet) >= 18.4*He - 21.74 
+    if log(Rethet) >= 18.4*He(i) - 21.74 
         laminar = false;
         disp([x(i) Rethet/1000])
         int=i;
@@ -54,8 +54,6 @@ while laminar && i < n
 end
 
 
-ill=x(i);
-disp(ill)
 
 if ils ~= 0
     He(1,i)=1.51509;%set to ls value
@@ -63,7 +61,7 @@ end
 
 
 %initial conditions for turbulent loop from laminar loop output
-delta_E=sqrt(thetaonlsq)*He(1,i); %to counteract the i+1 in the lam flow loop
+delta_E=theta(i)*He(i);
 Re=ReL;
 thick0(1) = theta(1,i); %theta
 thick0(2) = delta_E; %delta_E
