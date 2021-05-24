@@ -28,7 +28,7 @@ legend('Thwaites’ solution','Blasius solution')
 %test for trainsition
 for i=1:1:n
     Rethet=ReL*ue(1,i)*TS(1,i);
-    m=-ReL*(TS(1,i)^2)*p_grad(1,i);
+    m=-ReL*(TS(1,i)^2)*v_grad(1,i);
     H = thwaites_lookup(m);
     He=laminar_He(H);
     

@@ -3,11 +3,10 @@ function lhsmat = build_lhs(xs,ys)
 np = length(xs) - 1; 
 psip = zeros(np,np+1);
 
-
 for ip=1:1:np
     for jp=1:1:np+1
         if jp==1
-           [infa,~] = panelinf(xs(jp),ys(jp),xs(jp+1),ys(jp+1),xs(ip),ys(ip));
+
            %get infa and infb at point (x(ip),y(ip)) due to the first pannel
            psip(ip,jp)=infa;
         elseif jp==np+1
