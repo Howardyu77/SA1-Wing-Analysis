@@ -121,14 +121,14 @@ if its~=0
     disp(['Turbulent separation at ' num2str(x(its))]);
 end
 
-plot(x,theta);
+plot(x,theta,'LineWidth',1.5);
 hold on
 xlabel('x/L')
 ylabel('\theta/L')
 title('Non-dimensionalised momentum thickness plot')
 
 figure(2)
-plot(x,He)
+plot(x,He,'LineWidth',1.5)
 xlabel('x/L')
 ylabel('H_e/L')
 title('Energy shape factor plot')
