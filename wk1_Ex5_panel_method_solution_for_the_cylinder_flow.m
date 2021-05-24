@@ -1,5 +1,6 @@
 clear;
 close all;
+tic
 %define the cylinerical panels
 np=100;
 theta = (0:np)*2*pi/np;
@@ -50,3 +51,4 @@ ylabel("gam")
 title('Plots of surface velocity');
 axis([0 2 -2.5 2.5])
 legend('\alpha=0','\alpha=\pi/15')
+toc
