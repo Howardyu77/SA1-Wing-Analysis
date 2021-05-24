@@ -13,16 +13,16 @@ ils=0;
 %find the velocity gradient 
 v_grad = gradient(ue,x);
 v_grad(1);
-TS=zeros(1,n);
+theta=zeros(1,n);
 i = 1;
 while laminar && i < n
     i = i + 1;
     %compute theta/L, Thwaites’ solution, Retheta
-    thetaonlsq=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1,1),ue(1,1),x(1,i),ue(1,i));
-    TS(1,i)=sqrt(thetaonlsq); %Thwaites’ solution
-    Rethet=ReL*ue(1,i)*TS(1,i);
+    theta(i)=(0.45/ReL)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+    theta(i)=sqrt(theta(i)); %Thwaites’ solution
+    Rethet=ReL*ue(i)*theta(i);
     
-    m=-ReL*(TS(1,i)^2)*v_grad(1,i);
+    m=-ReL*(theta(i)^2)*v_grad(i);
     H = thwaites_lookup(m);
     He=laminar_He(H);
     
@@ -49,7 +49,7 @@ while laminar && i < n
 end
 
 
-plot(x,TS);
+plot(x,theta);
 hold on
 BS=0.664/sqrt(ReL);
 plot(x,BS.*sqrt(x));

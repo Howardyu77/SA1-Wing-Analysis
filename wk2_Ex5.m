@@ -5,7 +5,7 @@ global Re ue0 duedx
 n = 101; % defines number of panels
 
 
-Re=1e7;
+Re=1e8;
 ue0=1;
 duedx=-0.6;
 
@@ -23,19 +23,7 @@ theta_7=0.037.*x.*(Re.*x).^(-1/5);
 theta_9=0.023.*x.*(Re.*x).^(-1/6);
 
 He=thickhist(:,2)./thickhist(:,1);
-turb_sep=0;
-i=1;
-while i<= length(He) && turb_sep==0
-    if He(i)<1.46
-        its=i;
-        turb_sep=1;
-    end 
-    i=i+1;
-end
 
-if its~=0
-    disp(['Turbulent separation at ' num2str(x(its))]);
-end
 
 plot(x, thickhist(:,1),'LineWidth',1.5);
 hold on 
@@ -51,7 +39,7 @@ hold on
 threshold=1.46.*ones(length(x),1);
 plot(x,threshold,':','LineWidth',1.5);
 
-%using InterX function to find the intesection between the threshold line
+%using InterX function(downloaded from MathWork) to find the intesection between the threshold line
 %and the He curve
 P = InterX([x';He'],[x';threshold']);
 plot(P(1,:),P(2,:),'r.','markersize',18)
