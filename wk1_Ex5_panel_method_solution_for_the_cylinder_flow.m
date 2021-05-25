@@ -10,7 +10,6 @@ gammas = -2*sin(theta);
 
 %flow condition at alpha=0
 alpha=0;
-
 A = build_lhs(xs,ys);
 b = build_rhs(xs,ys,alpha); 
 gam = A\b;
@@ -31,6 +30,7 @@ axis([0 2 -2.5 2.5])
 alpha=pi/15;
 
 A = build_lhs(xs,ys);
+
 b = build_rhs(xs,ys,alpha); 
 gam = A\b;
 
