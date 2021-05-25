@@ -20,10 +20,6 @@ ils=0;
 itr=0;
 its=0;
 
-%defind the velocity gradient 
-v_grad = duedx;
-
-
 %initialise empty matrices to store results
 He=zeros(1,n);
 He(1,1)=1.57258; % define He at x/l=0
@@ -38,7 +34,7 @@ while laminar && i < n
     theta(i)=sqrt(theta(i));
     Rethet=ReL*ue(i)*theta(i);
 
-    m=-ReL*(theta(i)^2)*v_grad;
+    m=-ReL*(theta(i)^2)*duedx;
     H = thwaites_lookup(m);
     He(i)=laminar_He(H);
     
