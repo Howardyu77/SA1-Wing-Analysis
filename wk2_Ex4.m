@@ -24,7 +24,7 @@ plot(x,theta_7,'LineWidth',1.5);
 hold on 
 plot(x, theta_9,'LineWidth',1.5);
 plot(x, thickhist(:,1),'LineWidth',1.5,'color',[0, 0.5, 0] );
-legend({'\theta_7/L','\theta_9/L','thickhist'},'Location','northwest','FontSize',14);
-ylabel('\theta/L');
-xlabel('x/L')
+legend({'\theta_7/L','\theta_9/L','Calculated thickness'},'Location','northwest','FontSize',14);
+ylabel('\theta/L','FontSize',14);
+xlabel('x/L','FontSize',14)
 

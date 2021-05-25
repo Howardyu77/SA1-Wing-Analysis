@@ -18,7 +18,6 @@ end
 plot(x,TS,'LineWidth',1.5);
 hold on
 plot(x,(0.664/sqrt(ReL)).*sqrt(x),'LineWidth',1.5);
-xlabel('x/L')
-ylabel('\theta/L')
+xlabel('x/L','FontSize',14)
+ylabel('\theta/L','FontSize',14)
 legend({'Thwaites’ solution','Blasius solution'},'Location','northwest','FontSize',14);
-title('Momentum thickness plot')

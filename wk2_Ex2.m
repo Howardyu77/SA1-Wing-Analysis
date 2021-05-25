@@ -9,7 +9,7 @@ n=length(x);
 ue=linspace(1,0.9,101);
 %find the velocity gradient 
 v_grad = gradient(ue,x);
-v_grad(1);
+
 TS=zeros(1,n);
 
 for i=1:1:n

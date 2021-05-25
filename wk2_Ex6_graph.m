@@ -6,9 +6,9 @@ global Re ue0 duedx
 %Conditions for panels and flow
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-ReL=1e5;
+ReL=1e4;
 x = linspace(0,1,n);
-duedx=-.38; %velocity grad
+duedx=-.25; %velocity grad
 
 %linearly varying ue/U
 ue=linspace(1,1+duedx,n);
@@ -126,20 +126,18 @@ if ils~=0
         hold off
         xlabel('x/L','FontSize',14)
         ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Laminar separation','Turbulent reattachment','Turbulent separation'},'Location', 'Best')
+        legend({'Laminar separation','Turbulent reattachment','Turbulent separation'},'Location', 'Best','FontSize',14)
 
         figure(2)
-        plot(x,theta,'LineWidth',2, 'HandleVisibility','off');
+        plot(x,He,'LineWidth',2, 'HandleVisibility','off');
         hold on
-        plot(x(ils),theta(ils),'*','MarkerSize',10,'LineWidth',1.5);
-        plot(x(itr),theta(itr),'o','MarkerSize',10,'LineWidth',1.5);
-        plot(x(its),theta(its),'+','MarkerSize',10,'LineWidth',1.5);
+        plot(x(ils),He(ils),'*','MarkerSize',10,'LineWidth',1.5);
+        plot(x(itr),He(itr),'o','MarkerSize',10,'LineWidth',1.5);
+        plot(x(its),He(its),'+','MarkerSize',10,'LineWidth',1.5);
         hold off
         xlabel('x/L','FontSize',14)
-        ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Laminar separation','Turbulent reattachment','Turbulent separation'},'Location', 'Best')
+        ylabel('H_e/L','FontSize',14)
+        legend({'Laminar separation','Turbulent reattachment','Turbulent separation'},'Location', 'Best','FontSize',14)
     else
         plot(x,theta,'LineWidth',2, 'HandleVisibility','off');
         hold on
@@ -148,19 +146,17 @@ if ils~=0
         hold off
         xlabel('x/L','FontSize',14)
         ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Laminar separation','Turbulent reattachment',},'Location', 'Best')
+        legend({'Laminar separation','Turbulent reattachment',},'Location', 'Best','FontSize',14)
 
         figure(2)
-        plot(x,theta,'LineWidth',2, 'HandleVisibility','off');
+        plot(x,He,'LineWidth',2, 'HandleVisibility','off');
         hold on
-        plot(x(ils),theta(ils),'*','MarkerSize',10,'LineWidth',1.5);
-        plot(x(itr),theta(itr),'o','MarkerSize',8,'LineWidth',1.5);
+        plot(x(ils),He(ils),'*','MarkerSize',10,'LineWidth',1.5);
+        plot(x(itr),He(itr),'o','MarkerSize',8,'LineWidth',1.5);
         hold off
         xlabel('x/L','FontSize',14)
-        ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Laminar separation','Turbulent reattachment'},'Location', 'Best')
+        ylabel('H_e/L','FontSize',14)
+        legend({'Laminar separation','Turbulent reattachment'},'Location', 'Best','FontSize',14)
     end
 else
     if its~=0
@@ -171,19 +167,17 @@ else
         hold off
         xlabel('x/L','FontSize',14)
         ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Natural transition','Turbulent separation'},'Location', 'Best')
+        legend({'Natural transition','Turbulent separation'},'Location', 'Best','FontSize',14)
 
         figure(2)
-        plot(x,theta,'LineWidth',2, 'HandleVisibility','off');
+        plot(x,He,'LineWidth',2, 'HandleVisibility','off');
         hold on
-        plot(x(int),theta(int),'.','MarkerSize',10,'LineWidth',1.5);
-        plot(x(its),theta(its),'+','MarkerSize',10,'LineWidth',1.5);
+        plot(x(int),He(int),'.','MarkerSize',10,'LineWidth',1.5);
+        plot(x(its),He(its),'+','MarkerSize',10,'LineWidth',1.5);
         hold off
         xlabel('x/L','FontSize',14)
-        ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Natural transition','Turbulent separation'},'Location', 'Best')
+        ylabel('H_e/L','FontSize',14)
+       legend({'Natural transition','Turbulent separation'},'Location', 'Best','FontSize',14)
     else
         plot(x,theta,'LineWidth',2,'HandleVisibility','off');
         hold on
@@ -191,17 +185,15 @@ else
         hold off
         xlabel('x/L','FontSize',14)
         ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Natural transition'},'Location', 'Best')
+        legend({'Natural transition'},'Location', 'Best','FontSize',14)
 
         figure(2)
-        plot(x,theta,'LineWidth',2, 'HandleVisibility','off');
+        plot(x,He,'LineWidth',2, 'HandleVisibility','off');
         hold on
-        plot(x(int),theta(int),'.','MarkerSize',10,'LineWidth',1.5);
+        plot(x(int),He(int),'.','MarkerSize',10,'LineWidth',1.5);
         hold off
         xlabel('x/L','FontSize',14)
-        ylabel('\theta/L','FontSize',14)
-        title('Non-dimensionalised momentum thickness plot')
-        legend({'Natural transition'},'Location', 'Best')
+        ylabel('H_e/L','FontSize',14)
+        legend({'Natural transition'},'Location', 'Best','FontSize',14)
     end
 end
