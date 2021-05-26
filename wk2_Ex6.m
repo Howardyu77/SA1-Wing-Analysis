@@ -66,10 +66,8 @@ while its==0 && i<n
     He(i)=thick0(2)/thick0(1);
     
     %test for turbulent reattachment if it hasn't reattached
-    if ils ~= 0  && itr==0
-        if He(i)>1.58
-            itr=i;   
-        end
+    if ils ~= 0  && itr==0 && He(1,i)>1.58
+        itr=i;   
     end
     
     %test for turbulent separation
