@@ -6,9 +6,9 @@ global Re ue0 duedx
 %Conditions for panels and flow
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-ReL=1e4;
+ReL=1e5;
 x = linspace(0,1,n);
-duedx=-0.25; %velocity grad
+duedx=-0.38; %velocity grad
 
 %linearly varying ue/U
 ue=linspace(1,1+duedx,n);
@@ -64,8 +64,8 @@ thick0(2) = delta_E; %delta_E
 %start turbulent loop, geting data from laminar loop output
 while its==0 && i<n
     i = i + 1;
-    ue0=ue(1,i);
-    [delx, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
+    ue0=ue(i);
+    [~, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
     %update theta and delta_E
     thick0(1)=thickhist(end,1);
     thick0(2)=thickhist(end,2);

@@ -36,7 +36,7 @@ delstar(1)=H*theta(1);
 He(1)=laminar_He(H);
 
 %start the laminar loop
-i = 2;
+i = 1;
 while laminar && i < n
     i = i + 1;
     %calculate ue,duedx
@@ -44,7 +44,7 @@ while laminar && i < n
     duedx=(ue(i)-ue(i-1))/(x(i)-x(i-1));
     
     %compute theta/L, Retheta
-    theta(i)=(0.45/Re)*(ue(i))^(-6)*ueintbit(0,0,x(i),ue(i));%x=0,ue=0 at stag condition
+    theta(i)=(0.45/Re)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
     theta(i)=sqrt(theta(i));
     Rethet=Re*ue(i)*theta(i);
 
@@ -66,7 +66,7 @@ end
 
 
 if ils ~= 0
-    He(1,i)=1.51509;%set to ls value
+    He(i)=1.51509;%set to ls value
 end
 
 
@@ -83,7 +83,7 @@ while its==0 && i<n
     duedx=(ue(i)-ue(i-1))/(x(i)-x(i-1));
     
     ue0=ue(i);
-    [delx, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
+    [~, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
     %update theta and delta_E
     thick0(1)=thickhist(end,1);
     thick0(2)=thickhist(end,2);
