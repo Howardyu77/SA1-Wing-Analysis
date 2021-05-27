@@ -6,9 +6,9 @@ global Re ue0 duedx
 %Conditions for panels and flow
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-Re=1e5;
+Re=1e7;
 x = linspace(0,1,n);
-duedx=-0.38; %velocity grad
+duedx=0; %velocity grad
 ue=linspace(1,1+duedx,n);%linearly varying ue/U
 
 %define variables to store location of transition, separation, turbulent
