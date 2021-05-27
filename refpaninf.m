@@ -1,7 +1,7 @@
 function [infa, infb] = refpaninf(del,X,Y)
 %X and Y are vectors
 %Get infa and infb
-Y(find(Y<1.0e-6)))= 1.0e-6;
+Y(find(Y<1.0e-6))= 1.0e-6;
 np = length(X)-1;
 infa= zeros(np);
 infb= zeros(np);
