@@ -9,15 +9,15 @@ n=length(x);
 ue=linspace(1,0.9,101);
 %find the velocity gradient 
 v_grad = gradient(ue,x);
-v_grad(1);
-TS=zeros(1,n);
+
+theta=zeros(1,n);
 
 for i=1:1:n
-    thetaonlsq=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1,1),ue(1,1),x(1,i),ue(1,i));
-    TS(1,i)=sqrt(thetaonlsq);
+    theta(i)=(0.45/ReL)*(ue(1,i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+    theta(i)=sqrt(theta(i));
 end
 
-plot(x,TS);
+plot(x,theta);
 hold on
 BS=0.664/sqrt(ReL);
 plot(x,BS.*sqrt(x));
@@ -27,8 +27,8 @@ legend('Thwaites’ solution','Blasius solution')
 
 %test for trainsition
 for i=1:1:n
-    Rethet=ReL*ue(1,i)*TS(1,i);
-    m=-ReL*(TS(1,i)^2)*v_grad(1,i);
+    Rethet=ReL*ue(i)*theta(i);
+    m=-ReL*(theta(i)^2)*v_grad(i);
     H = thwaites_lookup(m);
     He=laminar_He(H);
     

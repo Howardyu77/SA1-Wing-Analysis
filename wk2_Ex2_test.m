@@ -5,12 +5,10 @@ n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
 ReL=10e6;%change acrodingly
 x = linspace(0,1,n);
-n=length(x);
 %linearly varying ue/U
 ue=linspace(1,.9,n);%change acrodingly
 %find the velocity gradient 
 v_grad = gradient(ue,x);
-v_grad(1);
 
 theta=zeros(1,n);
 
