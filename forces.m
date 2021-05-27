@@ -8,8 +8,6 @@ H_te_l=delstarl(end)/thetal(end);
 
 ue_te= sqrt(1-cp(end));
 
-
-
 theta_inf_u=thetau(end)*ue_te^((H_te_u+5)/2);
 theta_inf_l=thetal(end)*ue_te^((H_te_l+5)/2);
 
