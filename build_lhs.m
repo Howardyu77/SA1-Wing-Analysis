@@ -3,10 +3,17 @@ function lhsmat = build_lhs(xs,ys)
 %This function assemble the matrix A
 np = length(xs) - 1; 
 psip = zeros(np,np+1);
+infa = zeros(np);
+infb = zeros(np);
+
+[infa, infb] = panelinf(xs,ys,xs,ys);
 
 for ip=1:np
-    for jp=1:np
+    psip(ip,1) = infa(1);
+    for jp=2:np
+        psip(ip,jp) = infa(jp)+infb(jp-1);
     end
+    psip(ip,np+1) = infb(np);
 end
         
 %build lhsmat
