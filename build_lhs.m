@@ -5,19 +5,8 @@ np = length(xs) - 1;
 psip = zeros(np,np+1);
 
 for ip=1:np
-    infa = zeros(2);
-    infb = zeros(2);
     for jp=1:np
-        %make current value of inf the previous value;
-        %find new current value
-        [infa,infb] = panelinf(xs(jp),ys(jp),xs(ip),ys(ip));
-        if jp ==1
-            psip(ip,1) = infa(1);
-        else
-            psip(ip,jp) = infa(2)+infb(1);
-        end
     end
-    psip(ip,np+1) = infb(2);               
 end
         
 %build lhsmat
