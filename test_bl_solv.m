@@ -9,7 +9,7 @@ n = 100;
 x = linspace(1/n,1,n);
 cp = zeros(1,n);
 
-[int ils itr its delstar theta] = bl_solv ( x, cp );
+[int, ils, itr, its, delstar, theta] = bl_solv ( x, cp );
 blthet = 0.664 * sqrt(x/Re);
 
 if int~=0
