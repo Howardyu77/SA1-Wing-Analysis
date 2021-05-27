@@ -1,32 +1,27 @@
+
 function lhsmat = build_lhs(xs,ys)
 %This function assemble the matrix A
 np = length(xs) - 1; 
 psip = zeros(np,np+1);
 
-
-for ip=1:1:np
-    for jp=1:1:np+1
-        if jp==1
-           [infa,~] = panelinf(xs(jp),ys(jp),xs(jp+1),ys(jp+1),xs(ip),ys(ip));
-           %get infa and infb at point (x(ip),y(ip)) due to the first pannel
-           psip(ip,jp)=infa;
-        elseif jp==np+1
-            %compute infa and infb at (x(ip),y(ip)) due to the last pannel
-           [~,infb] = panelinf(xs(jp-1),ys(jp-1),xs(1),ys(1),xs(ip),ys(ip));
-           psip(ip,jp)=infb;
+for ip=1:np
+    infa = zeros(2);
+    infb = zeros(2);
+    for jp=1:np
+        %make current value of inf the previous value;
+        %find new current value
+        [infa,infb] = panelinf(xs(jp),ys(jp),xs(ip),ys(ip));
+        if jp ==1
+            psip(ip,1) = infa(1);
         else
-           [infa,~] = panelinf(xs(jp),ys(jp),xs(jp+1),ys(jp+1),xs(ip),ys(ip));
-           psip(ip,jp)=infa;
-           [~,infb] = panelinf(xs(jp-1),ys(jp-1),xs(jp),ys(jp),xs(ip),ys(ip));
-           psip(ip,jp)=psip(ip,jp)+infb;
+            psip(ip,jp) = infa(2)+infb(1);
         end
     end
+    psip(ip,np+1) = infb(2);               
 end
-
-
-%initialise lhsmat
+        
+%build lhsmat
 lhsmat = zeros(np+1,np+1);
-
 for jp=1:1:np+1
     for ip=2:1:np
         %place the differences between rows into 2nd to np th rows of A
@@ -37,3 +32,5 @@ end
 %gammas
 lhsmat(1,1)=1;
 lhsmat(np+1,np+1)=1;
+
+

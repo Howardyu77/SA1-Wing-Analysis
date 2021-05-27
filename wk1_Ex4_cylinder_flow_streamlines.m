@@ -38,8 +38,8 @@ end
 for k=1:1:np
     for i=1:1:nx
         for j=1:1:ny
-           [infa(i,j),infb(i,j)] = panelinf(xs(k),ys(k),xs(k+1),ys(k+1),xm(i,j),ym(i,j));
-           psi_k(i,j) =  gammas(k)*infa(i,j) + gammas(k+1)*infb(i,j);
+           [infa(i,j),infb(i,j)] = panelinf(xs(k),ys(k),xm(i,j),ym(i,j));
+           psi_k(i,j) =  gammas(k)*infa(i) + gammas(k+1)*infb(i);
         end
     end
     psi = psi + psi_k;

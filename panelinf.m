@@ -1,19 +1,23 @@
-function [infa, infb] = panelinf(xa,ya,xb,yb,x,y)
-%   Calculate influence coefficients fa, fb at (x,y) due to our general panel.
-a = [xa ya 0];
-b = [xb yb 0];
-c = [x y 0];
+function [infa, infb] = panelinf(xs,ys,x,y)
+%   generates vectors of fa and fb
+%   x,y are grid points, xs,ys are panel corners
+X=zeros(length(xs));
+Y=zeros(length(xs));
+del=zeros(length(xs));
 
-r = c-a;
-t = (b-a)/norm(b-a);
-m = [0 0 -1];
-n = cross(t,m)/norm(cross(t,m));
-
-del = sqrt((xb-xa)^2+(yb-ya)^2);
-X = dot(r,t);
-Y = dot(r,n);
-
-
+for i=1:length(xs)
+    if i==length(xs)
+        d =[xs(1)-xs(i), ys(1)-ys(i)];
+    else   
+    d =[xs(i+1)-xs(i), ys(i+1)-ys(i)];  
+    r = [x(i)-xs(i), y(i)-ys(i)];
+    del(i)= norm(d);
+    t = d/del;
+    n = [-t(2),t(1)];
+    X(i) = dot(r,t);
+    Y(i) = dot(r,n);
+    end
+end
 [infa, infb] = refpaninf(del,X,Y);
 end
 
