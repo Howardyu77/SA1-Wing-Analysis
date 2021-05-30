@@ -27,6 +27,7 @@ end
 c = -0.4:0.2:1.2;
 
 contour(xm,ym,psi,c);
-title('Plot of Streamfunction of a point vortex');
+set(gca,'FontSize',16) % Creates an axes and sets its FontSize to 18
+%title('Plot of Streamfunction of a point vortex');
 xlabel('x');
 ylabel('y');
