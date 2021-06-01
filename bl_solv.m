@@ -34,7 +34,17 @@ m=-Re*(theta(1)^2)*duedx;
 H = thwaites_lookup(m);
 delstar(1)=H*theta(1);
 He(1)=laminar_He(H);
+Rethet=Re*ue(1)*theta(1);
+f_int=ueintbit(0,0,x(1),ue(1));
 
+if log(Rethet) >= 18.4*He(1) - 21.74 
+        laminar = false;
+        disp([x(1) Rethet/1000])
+        int=1;
+elseif m>=0.09
+        laminar = false;
+        ils=1;
+end
 %start the laminar loop
 i = 1;
 while laminar && i < n
@@ -42,9 +52,9 @@ while laminar && i < n
     %calculate ue,duedx
     ue(i)=sqrt(1-cp(i));
     duedx=(ue(i)-ue(i-1))/(x(i)-x(i-1));
-    
+    f_int=f_int+ueintbit(x(i-1),ue(i-1),x(i),ue(i));
     %compute theta/L, Retheta
-    theta(i)=(0.45/Re)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+    theta(i)=(0.45/Re)*(ue(i))^(-6)*f_int;
     theta(i)=sqrt(theta(i));
     Rethet=Re*ue(i)*theta(i);
 
