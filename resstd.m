@@ -3,7 +3,7 @@
 %  Van de Vooren geometry parameters, see vdvfoil.m.
 
 %  free-stream incidence
-alpha = pi/36;
+alpha = pi/12;
 
 %  Van de Vooren geometry and pressure distribution
 npin = 2000;
@@ -62,10 +62,9 @@ cp8 = 1 - gams.^2;
 
 figure(2)
 plot(xsin,-cpex,xs1,-cp1,'--',xs2,-cp2,'-.',xs4,-cp4,'-+',xs8,-cp8,'-x')
-xlabel('x/c')
-ylabel('-c_p')
-title('Van de Vooren cps; varying panel size')
-legend('exact','100pans','200pans','400pans','800pans')
+xlabel('x/c','FontSize',14)
+ylabel('-c_p','FontSize',14)
+legend({'exact','100pans','200pans','400pans','800pans'},'FontSize',14,'location','best')
 
 figure(3)
 plot(xsin,-cpex,xs1,-cp1,'--')

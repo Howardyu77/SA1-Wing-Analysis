@@ -1,4 +1,4 @@
-function [xs, ys, alpha, clswp, cdswp, lovdswp] = foil_function(parfile_name)
+function [xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam] = foil_function(parfile_name)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 global Re

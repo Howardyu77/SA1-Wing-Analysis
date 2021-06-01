@@ -1,4 +1,4 @@
-Section identifier              : naca0012
-Number of panels                : 100
-Reynolds number                 : 6e6
-Range of incidences (degrees)   : -5:20
+Section identifier              : thin_foil
+Number of panels                : 800
+Reynolds number                 : 3e6
+Range of incidences (degrees)   : -14:14
