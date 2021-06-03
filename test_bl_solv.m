@@ -3,7 +3,7 @@
 clear all
 global Re
 
-Re = 1000000;
+Re = 9e6;
 
 n = 100;
 x = linspace(1/n,1,n);
