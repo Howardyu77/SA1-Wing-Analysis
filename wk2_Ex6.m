@@ -26,10 +26,12 @@ theta=zeros(1,n);
 He(1)=1.57258; % define He at x/l=0
 %start the laminar loop
 i = 1;
+integral=0;
 while laminar && i < n
     i = i + 1;
-    %compute theta/L, Retheta
-    theta(i)=(0.45/Re)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+    integral=integral + ueintbit(x(i-1),ue(i-1),x(i),ue(i));
+    %compute theta/L, Thwaites’ solution, Retheta
+    theta(i)=(0.45/Re)*(ue(i))^(-6)*integral;
     theta(i)=sqrt(theta(i));
     Rethet=Re*ue(i)*theta(i);
 
