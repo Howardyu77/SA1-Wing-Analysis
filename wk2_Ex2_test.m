@@ -3,7 +3,7 @@ close all;
 
 n = 101; % defines number of panels
 laminar = true; % initializes boundary layer state flag 
-ReL=10e6;%change acrodingly
+ReL=1e6;%change acrodingly
 x = linspace(0,1,n);
 %linearly varying ue/U
 ue=linspace(1,.9,n);%change acrodingly
@@ -13,10 +13,12 @@ v_grad = gradient(ue,x);
 theta=zeros(1,n);
 
 i = 1;
+integral=0;
 while laminar && i < n
     i = i + 1;
+    integral=integral + ueintbit(x(i-1),ue(i-1),x(i),ue(i));
     %compute theta/L, Thwaites’ solution, Retheta
-    theta(i)=(0.45/ReL)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+    theta(i)=(0.45/ReL)*(ue(i))^(-6)*integral;
     theta(i)=sqrt(theta(i));%Thwaites’ solution
     Rethet=ReL*ue(i)*theta(i);
     

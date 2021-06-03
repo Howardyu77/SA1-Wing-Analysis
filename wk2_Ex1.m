@@ -9,9 +9,10 @@ n=length(x);
 ue=ones(1,n);
 
 theta=zeros(1,n);
-
-for i=1:1:n
-    theta(i)=(0.45/ReL)*(ue(i))^(-6)*ueintbit(x(1),ue(1),x(i),ue(i));
+integral=0;
+for i=2:1:n
+    integral=integral + ueintbit(x(i-1),ue(i-1),x(i),ue(i));
+    theta(i)=(0.45/ReL)*(ue(i))^(-6)*integral;
     theta(i)=sqrt(theta(i));
 end
 
