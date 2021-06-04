@@ -39,7 +39,6 @@ f_int=ueintbit(0,0,x(1),ue(1));
 
 if log(Rethet) >= 18.4*He(1) - 21.74 
         laminar = false;
-        disp([x(1) Rethet/1000])
         int=1;
 elseif m>=0.09
         laminar = false;
@@ -65,19 +64,14 @@ while laminar && i < n
     
     if log(Rethet) >= 18.4*He(i) - 21.74 
         laminar = false;
-        disp([x(i) Rethet/1000])
         int=i;
     elseif m>=0.09
         laminar = false;
         ils=i;
+        He(i)=1.51509;
     end
 end
 
-
-
-if ils ~= 0
-    He(i)=1.51509;%set to ls value
-end
 
 
 %initial conditions for turbulent loop from laminar loop output
@@ -92,7 +86,7 @@ while its==0 && i<n
     ue(i)=sqrt(1-cp(i));
     duedx=(ue(i)-ue(i-1))/(x(i)-x(i-1));
     
-    ue0=ue(i);
+    ue0=ue(i-1);
     [~, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
     %update theta and delta_E
     thick0(1)=thickhist(end,1);
@@ -100,7 +94,7 @@ while its==0 && i<n
     theta(i)=thickhist(end,1);
     He(i)=thick0(2)/thick0(1);% this
     H=(11*He(i)+15)/(48*He(i)-59);
-    delstar(i)=theta(i)*H;
+    
     
     %test for turbulent reattachment if it hasn't reattached
     if ils ~= 0  && itr==0
@@ -112,8 +106,9 @@ while its==0 && i<n
     %test for turbulent separation
     if He(i)<1.46
         its=i;
+        H=2.803;
     end 
-    
+    delstar(i)=theta(i)*H;
 end 
 
 %separated turbulent boundary layer
@@ -125,7 +120,7 @@ while its~=0 && i<n
     
     theta(i)=(ue(i-1)/ue(i))^(2.803+2)*theta(i-1);
     He(i)=He(its);
-    H=(11*He(i)+15)/(48*He(i)-59);
+    H=2.803;
     delstar(i)=theta(i)*H;
 end
 end

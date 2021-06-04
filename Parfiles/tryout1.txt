@@ -1,4 +1,4 @@
-Section identifier              : thin_foil
+Section identifier              : stupid_shape
 Number of panels                : 800
 Reynolds number                 : 3e6
-Range of incidences (degrees)   : -14:14
+Range of incidences (degrees)   : 2
