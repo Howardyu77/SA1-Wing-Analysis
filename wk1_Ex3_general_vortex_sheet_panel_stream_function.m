@@ -34,13 +34,13 @@ end
 c = -0.15:0.05:0.15;
 figure(1)
 contour(xm,ym,infa,c);
-title('Plot of fa');
+%title('Plot of fa');
 xlabel('x');
 ylabel('y');
 
 figure(2)
 contour(xm,ym,infb,c);
-title('Plot of fb');
+%title('Plot of fb');
 xlabel('x');
 ylabel('y');
 
@@ -75,7 +75,7 @@ infa_dis = psi;
 
 figure(3)
 contour(xm,ym,infa_dis,c);
-title('Plot of fa using discretised panel')
+%title('Plot of fa using discretised panel')
 xlabel('x');
 ylabel('y');
 
@@ -105,7 +105,7 @@ infb_dis = psi;
 
 figure(4)
 contour(xm,ym,infb_dis,c);
-title('Plot of fb using discretised panel')
+%title('Plot of fb using discretised panel')
 xlabel('x');
 ylabel('y');
 

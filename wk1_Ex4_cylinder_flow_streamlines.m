@@ -49,10 +49,11 @@ end
 c = -1.75:0.25:1.75;
 figure(1)
 contour(xm,ym,psi,c);
+set(gca,'FontSize',16)
 hold on
 plot(xs,ys)
 hold off 
-title('Plot of Streamfunction using fa and fb');
+%title('Plot of Streamfunction using fa and fb');
 xlabel('x');
 ylabel('y');
 

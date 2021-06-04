@@ -46,9 +46,10 @@ Gamma;
 
 hold on
 plot(theta/pi,gam)
+set(gca,'FontSize',16)
 xlabel("\theta/\pi")
-ylabel("gam")
-title('Plots of surface velocity');
+ylabel("\gamma")
+%title('Plots of surface velocity');
 axis([0 2 -2.5 2.5])
 legend('\alpha=0','\alpha=\pi/15')
 toc
