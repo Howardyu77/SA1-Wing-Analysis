@@ -92,7 +92,7 @@ while its==0 && i<n
     ue(i)=sqrt(1-cp(i));
     duedx=(ue(i)-ue(i-1))/(x(i)-x(i-1));
     
-    ue0=ue(i);
+    ue0=ue(i-1);
     [~, thickhist] = ode45(@thickdash,[0,x(i)-x(i-1)],thick0);
     %update theta and delta_E
     thick0(1)=thickhist(end,1);
@@ -112,6 +112,7 @@ while its==0 && i<n
     %test for turbulent separation
     if He(i)<1.46
         its=i;
+        H=2.803;
     end 
     
 end 
@@ -125,7 +126,6 @@ while its~=0 && i<n
     
     theta(i)=(ue(i-1)/ue(i))^(2.803+2)*theta(i-1);
     He(i)=He(its);
-    H=(11*He(i)+15)/(48*He(i)-59);
     delstar(i)=theta(i)*H;
 end
 end
