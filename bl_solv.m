@@ -123,7 +123,6 @@ while its~=0 && i<n
     %calculate ue,duedx
     ue(i)=sqrt(1-cp(i));
     duedx=(ue(i)-ue(i-1))/(x(i)-x(i-1));
-    
     theta(i)=(ue(i-1)/ue(i))^(2.803+2)*theta(i-1);
     He(i)=He(its);
     delstar(i)=theta(i)*H;
