@@ -10,6 +10,7 @@ name=section;
 xs1=xs;
 ys1=ys;
 cp1=cp;
+lovdswp1=lovdswp;
 
 
 %  Read in the parameter file
@@ -21,7 +22,7 @@ fprintf(1, '%s\n\n', ['Reading in parameter file: ' parfile])
 
 [xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam] = foil_function(caseref);
 
-figure(1)
+figure(3)
 plot(xs,-cp1,'LineWidth',1.5)
 hold on
 plot(xs,-cp,'LineWidth',1.5)
@@ -36,6 +37,14 @@ plot(xs,ys,'LineWidth',1.5)
 xlabel('x','FontSize',14)
 ylabel('-c_p','FontSize',14)
 axis equal
+legend({name, section},'FontSize',14,'Location','Best')
+
+figure(1)
+plot(alpha,lovdswp1,'LineWidth',1.5)
+hold on
+plot(alpha,lovdswp,'LineWidth',1.5)
+xlabel('\alpha','FontSize',14)
+ylabel('c_l/c_d','FontSize',14)
 legend({name, section},'FontSize',14,'Location','Best')
 
 % str1='Re=' + string(sprintf('%1.2e',Re1));

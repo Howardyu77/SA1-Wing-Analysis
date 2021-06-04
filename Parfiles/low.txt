@@ -1,4 +1,4 @@
-Section identifier              : ltest6_4
+Section identifier              : ltest8_6
 Number of panels                : 800
 Reynolds number                 : 20e6
-Range of incidences (degrees)   : 0
+Range of incidences (degrees)   : -5:15
