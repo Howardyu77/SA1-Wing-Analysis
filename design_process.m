@@ -14,7 +14,7 @@ lovdswp1=lovdswp;
 
 
 %  Read in the parameter file
-caseref = 'low';
+caseref = 'high';
 parfile = ['Parfiles/' caseref '.txt'];
 fprintf(1, '%s\n\n', ['Reading in parameter file: ' parfile])
 [section np Re alpha] = par_read(parfile);
