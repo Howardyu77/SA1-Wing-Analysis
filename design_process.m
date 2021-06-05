@@ -9,6 +9,7 @@ clf
 name=section;
 xs1=xs;
 ys1=ys;
+clswp1=clswp;
 cp1=cp;
 lovdswp1=lovdswp;
 
@@ -22,7 +23,7 @@ fprintf(1, '%s\n\n', ['Reading in parameter file: ' parfile])
 
 [xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam] = foil_function(caseref);
 
-figure(3)
+figure(1)
 plot(xs,-cp1,'LineWidth',1.5)
 hold on
 plot(xs,-cp,'LineWidth',1.5)
@@ -38,15 +39,24 @@ xlabel('x','FontSize',14)
 ylabel('-c_p','FontSize',14)
 axis equal
 legend({name, section},'FontSize',14,'Location','Best')
-
-figure(1)
-plot(alpha,lovdswp1,'LineWidth',1.5)
-hold on
-plot(alpha,lovdswp,'LineWidth',1.5)
-xlabel('\alpha','FontSize',14)
-ylabel('c_l/c_d','FontSize',14)
-legend({name, section},'FontSize',14,'Location','Best')
-
+if length(alpha)~=1
+    figure(3)
+    plot(alpha,clswp1,'LineWidth',1.5)
+    hold on
+    plot(alpha,clswp,'LineWidth',1.5)
+    xlabel('\alpha','FontSize',14)
+    ylabel('c_l','FontSize',14)
+    legend({name, section},'FontSize',14,'Location','Best');
+    figure(4)
+    plot(alpha,lovdswp1,'LineWidth',1.5)
+    hold on
+    plot(alpha,lovdswp,'LineWidth',1.5)
+    xlabel('\alpha','FontSize',14)
+    ylabel('c_l/c_d','FontSize',14)
+    legend({name, section},'FontSize',14,'Location','Best')
+    
+    
+end
 % str1='Re=' + string(sprintf('%1.2e',Re1));
 % str2='Re=' + string(sprintf('%1.2e',Re2));
 % %%Post processing
