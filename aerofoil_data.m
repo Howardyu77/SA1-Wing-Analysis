@@ -11,9 +11,9 @@ parfile = ['Parfiles/' caseref '.txt'];
 fprintf(1, '%s\n\n', ['Reading in parameter file: ' parfile])
 [section2 np Re2 alpha2] = par_read(parfile);
 
-[xs, ys, alpha1,cp1, clswp1, cdswp1, lovdswp1,gam1] = foil_function('naca0012@3e6');
+[xs, ys, alpha1,cp1, clswp1, cdswp1, lovdswp1,gam1,flow_chic1] = foil_function('naca0012@3e6');
 
-%[xs, ys, alpha2,cp2, clswp2, cdswp2, lovdswp2,gam2] = foil_function('naca4412@3e6');
+% [xs, ys, alpha2,cp2, clswp2, cdswp2, lovdswp2,gam2,flow_chic2] = foil_function('naca4412@3e6');
 
 %Abbott, I. H. and von Doenhoff
 %naca4412 @Re 3e6
@@ -81,15 +81,15 @@ GOcp_free_3e3_15=[-8.65066000000000;-10.1789000000000;-9.72033000000000;-9.04329
 
 %0012
 % figure(1)
-plot(alpha1,clswp1,'-*','Linewidth',1.5);
-hold on 
-plot(naca0012_alpha,naca0012_cl,'-x','Linewidth',1.5);
-hold off
-grid
-grid minor
-xlabel('\alpha','Fontsize',14);
-ylabel('c_l','Fontsize',14);
-legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Location','best');
+% plot(alpha1,clswp1,'-*','Linewidth',1.5);
+% hold on 
+% plot(naca0012_alpha,naca0012_cl,'-x','Linewidth',1.5);
+% hold off
+% grid
+% grid minor
+% xlabel('\alpha','Fontsize',14);
+% ylabel('c_l','Fontsize',14);
+% legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Location','best');
 
 % %xfoil
 % figure(2)
@@ -116,18 +116,28 @@ legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Lo
 % legend({'Numerical solution','Xfoil'},'Fontsize',10,'Location','best');
 
 % figure(4)
-plot(clswp1,cdswp1,'-*','Linewidth',1.5);
-hold on
-plot(naca0012_cl1,naca0012_cd,'-x','Linewidth',1.5)
-axis([-1.5 1.5 0 0.02])
-grid
-grid minor
-xlabel('c_l','Fontsize',14);
-ylabel('c_d','Fontsize',14);
-legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Location','best');
-
-
-%4412
+% plot(clswp2,cdswp2,'-*','Linewidth',1.5);
+% hold on 
+% plot(x_naca4412_cl_5e5,x_naca4412_cd_5e5,'-x','Linewidth',1.5);
+% hold off
+% grid
+% grid minor
+% xlabel('c_l','Fontsize',14);
+% ylabel('c_d','Fontsize',14);
+% legend({'Numerical solution','Xfoil'},'Fontsize',10,'Location','best');
+% figure(4)
+% plot(clswp1,cdswp1,'-*','Linewidth',1.5);
+% hold on
+% plot(naca0012_cl1,naca0012_cd,'-x','Linewidth',1.5)
+% axis([-1.5 1.5 0 0.02])
+% grid
+% grid minor
+% xlabel('c_l','Fontsize',14);
+% ylabel('c_d','Fontsize',14);
+% legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Location','best');
+% 
+% 
+% %4412
 % figure(5)
 % plot(alpha2,clswp2,'-*','Linewidth',1.5);
 % hold on 
@@ -138,8 +148,8 @@ legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Lo
 % xlabel('\alpha','Fontsize',14);
 % ylabel('c_l','Fontsize',14);
 % legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Location','best');
-
-% %4412
+% 
+% % %4412
 % figure(7)
 % plot(clswp2,cdswp2,'-*','Linewidth',1.5);
 % hold on 
@@ -152,7 +162,7 @@ legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Lo
 % ylabel('c_d','Fontsize',14);
 % legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Location','best');
 % % 
-% %xfoil
+%xfoil
 % figure(6)
 % plot(alpha2,clswp2,'-*');
 % hold on 
@@ -163,17 +173,18 @@ legend({'Numerical solution','Abbott, I. H. and von Doenhoff'},'Fontsize',10,'Lo
 % legend({'Numerical solution','Xfoil'},'Fontsize',10,'Location','best');
 
 % figure(8)
-% plot(xs,-cp1,'Linewidth',2);
-% hold on
-% plot(GOx_free_3e3_15,-GOcp_free_3e3_15,'-x','Linewidth',1.5);
-% plot(x_free_6e6_10,-cp_fixed_3e3_15,'-d','Linewidth',1.5)
-% hold off
-% grid
-% grid minor
-% axis([-0.05 1 -2 14])
-% xlabel('x/c','Fontsize',14);
-% ylabel('-c_p','Fontsize',14);
-% legend({'Numerical solution',"Gregory and O'Reilly",'Ladson et al'},'Fontsize',10,'Location','best');
+plot(xs,cp1,'Linewidth',2);
+hold on
+plot(GOx_free_3e3_0,GOcp_free_3e3_0,'-x','Linewidth',1.5);
+plot(x_free_6e6_10,cp_fixed_3e3_0,'-d','Linewidth',1.5)
+hold off
+grid
+grid minor
+axis ij
+xlim([-0.05 1])
+xlabel('x/c','Fontsize',14);
+ylabel('c_p','Fontsize',14);
+legend({'Numerical solution',"Gregory and O'Reilly",'Ladson et al'},'Fontsize',10,'Location','best');
 
 
 

@@ -1,4 +1,4 @@
-function [xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam] = foil_function(parfile_name)
+function [xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam,flow_chic] = foil_function(parfile_name)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 global Re
@@ -9,6 +9,19 @@ parfile = ['Parfiles/' caseref '.txt'];
 fprintf(1, '%s\n\n', ['Reading in parameter file: ' parfile])
 [section np Re alpha] = par_read(parfile);
 
+% initiate empty lists for storing charateristics
+AOA=zeros(length(alpha),1);
+lift_coe=zeros(length(alpha),1);
+drag_coe=zeros(length(alpha),1);
+ldr=zeros(length(alpha),1);
+UNT=zeros(length(alpha),1);
+BNT=zeros(length(alpha),1);
+ULS=zeros(length(alpha),1);
+BLS=zeros(length(alpha),1);
+UTR=zeros(length(alpha),1);
+BTR=zeros(length(alpha),1);
+UTS=zeros(length(alpha),1);
+BTS=zeros(length(alpha),1);
 %  Read in the section geometry
 secfile = ['Geometry/' section '.surf'];
 [xk yk] = textread ( secfile, '%f%f' );
@@ -105,27 +118,36 @@ for nalpha = 1:length(alpha)
   disp ( sprintf ( '\n%s%5.3f', '  Lift coefficient: ', Cl ) )
   disp ( sprintf ( '%s%7.5f', '  Drag coefficient: ', Cd ) )
   disp ( sprintf ( '%s%5.3f\n', '  Lift-to-drag ratio: ', Cl/Cd ) )
-
+    
+  AOA(nalpha)=alpha(nalpha);
+  lift_coe(nalpha)=Cl;
+  drag_coe(nalpha)=Cd;
+  ldr(nalpha)=Cl/Cd;
+  
   upperbl = sprintf ( '%s', '  Upper surface boundary layer:' );
   if iunt~=0
     is = ipstag + 1 - iunt;
     upperbl = sprintf ( '%s\n%s%5.3f', upperbl, ... 
                         '    Natural transition at x = ', xs(is) );
+    UNT(nalpha)=xs(is);
   end
   if iuls~=0
     is = ipstag + 1 - iuls;
     upperbl = sprintf ( '%s\n%s%5.3f', upperbl, ... 
                         '    Laminar separation at x = ', xs(is) );
+    ULS(nalpha)=xs(is);
     if iutr~=0
       is = ipstag + 1 - iutr;
       upperbl = sprintf ( '%s\n%s%5.3f', upperbl, ... 
                           '    Turbulent reattachment at x = ', xs(is) );
+                      UTR(nalpha)=xs(is);
     end
   end
   if iuts~=0
     is = ipstag + 1 - iuts;
     upperbl = sprintf ( '%s\n%s%5.3f', upperbl, ... 
                         '    Turbulent separation at x = ', xs(is) );
+                    UTS(nalpha)=xs(is);
   end
   upperbl = sprintf ( '%s\n', upperbl );
   disp(upperbl)
@@ -135,21 +157,25 @@ for nalpha = 1:length(alpha)
     is = ipstag + ilnt;
     lowerbl = sprintf ( '%s\n%s%5.3f', lowerbl, ... 
                         '    Natural transition at x = ', xs(is) );
+                    BNT(nalpha)=xs(is);
   end
   if ills~=0
     is = ipstag + ills;
     lowerbl = sprintf ( '%s\n%s%5.3f', lowerbl, ... 
                         '    Laminar separation at x = ', xs(is) );
+                    BLS(nalpha)=xs(is);
     if iltr~=0
       is = ipstag + iltr;
       lowerbl = sprintf ( '%s\n%s%5.3f', lowerbl, ... 
                           '    Turbulent reattachment at x = ', xs(is) );
+                      BTR(nalpha)=xs(is);
     end
   end
   if ilts~=0
     is = ipstag + ilts;
     lowerbl = sprintf ( '%s\n%s%5.3f', lowerbl, ... 
                         '    Turbulent separation at x = ', xs(is) );
+                    BTS(nalpha)=xs(is);
   end
   lowerbl = sprintf ( '%s\n', lowerbl );
   disp(lowerbl)
@@ -163,7 +189,7 @@ for nalpha = 1:length(alpha)
 end
 
 %  save alpha sweep data in summary file
-
+flow_chic=[AOA lift_coe drag_coe ldr UNT ULS UTR UTS BNT BLS BTR BTS];
 fname = ['Data/' caseref '.mat'];
 save ( fname, 'xs', 'ys', 'alpha', 'clswp', 'cdswp', 'lovdswp' )
 

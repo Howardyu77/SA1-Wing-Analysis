@@ -1,5 +1,4 @@
-Section identifier              : htest7
+Section identifier              : htest10
 Number of panels                : 800
-Reynolds number                 : 5e5
+Reynolds number                 : 20e6
 Range of incidences (degrees)   : 0
-

@@ -13,7 +13,6 @@ clswp1=clswp;
 cp1=cp;
 lovdswp1=lovdswp;
 
-
 %  Read in the parameter file
 caseref = 'high';
 parfile = ['Parfiles/' caseref '.txt'];
@@ -21,23 +20,24 @@ fprintf(1, '%s\n\n', ['Reading in parameter file: ' parfile])
 [section np Re alpha] = par_read(parfile);
 
 
-[xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam] = foil_function(caseref);
-
+[xs, ys, alpha,cp, clswp, cdswp, lovdswp,gam,flow_chic] = foil_function(caseref);
 figure(1)
-plot(xs,-cp1,'LineWidth',1.5)
+plot(xs,cp1,'LineWidth',1.5)
 hold on
-plot(xs,-cp,'LineWidth',1.5)
-xlabel('x','FontSize',14)
-ylabel('-c_p','FontSize',14)
+plot(xs,cp,'LineWidth',1.5)
+xlabel('x/c','FontSize',14)
+ylabel('c_p','FontSize',14)
+axis ij
 legend({name, section},'FontSize',14,'Location','Best')
 
 figure(2)
 plot(xs1,ys1,'LineWidth',1.5)
 hold on
 plot(xs,ys,'LineWidth',1.5)
-xlabel('x','FontSize',14)
-ylabel('-c_p','FontSize',14)
+xlabel('x/c','FontSize',14)
+ylabel('y/c','FontSize',14)
 axis equal
+axis([0 1 -.2 .2])
 legend({name, section},'FontSize',14,'Location','Best')
 if length(alpha)~=1
     figure(3)
@@ -53,9 +53,7 @@ if length(alpha)~=1
     plot(alpha,lovdswp,'LineWidth',1.5)
     xlabel('\alpha','FontSize',14)
     ylabel('c_l/c_d','FontSize',14)
-    legend({name, section},'FontSize',14,'Location','Best')
-    
-    
+    legend({name, section},'FontSize',14,'Location','Best')   
 end
 % str1='Re=' + string(sprintf('%1.2e',Re1));
 % str2='Re=' + string(sprintf('%1.2e',Re2));
